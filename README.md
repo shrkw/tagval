@@ -7,7 +7,7 @@ Optionクラス、Statusクラス及びその基礎的なタグ付き値のク�
 
 # Documentation
 
-### `TagVal.open()` / `TagVal.close()`
+#### `TagVal.open()` / `TagVal.close()`
 Sets and unsets the functions in global object.
 Original values are reverted after `close()`.
 The functions to be opened are below:
@@ -20,37 +20,58 @@ The functions to be opened are below:
 - `Failure`
 - `Matchable`
 
-### `TagVal.Some(v)`
-creates an `Option` object tagged `Some` and retaining value `v`.
-
-### `TagVal.None()`
-creates an `Option` object tagged `None` and retaining nothing.
+## Option Class
 
 ### `TagVal.Option`
-### `TagVal.Option.fromValue(v)`
-If `v` is undefined or null, it returns an `Option` object tagged `None`,
-Otherwise, it returns an `Option` object tagged `Some` and retaining value `v`.
+`Option` is a class that expresses "there is something"(Some) or "there is nothing"(None). In fact, this class is a subclass of `Matchable`, which is tagged-value implementation.
 
-#### `prototype.map(f)`
-If tagged `Some`, it applies function `f` to retaining value `x` and returns new `Option` object tagged `Some` and retaining `f(x)`.
-If tagged `None`, it returns new `Option` object tagged `None`.
+For example, these situations below may be when you need `Option`:
+
+- you have to find an element from an array
+- you have to handle a setting that user specifies optionally
+
+```js
+var num_opt = find_num(); // assume it returns `Option`
+var DEFAULT = 30;
+
+// when you want to get its content with specifying default value
+var num = num_opt.getOrElse(DEFAULT);
+```
+
+### `TagVal.Some(v)`
+creates a new `Option` object tagged `Some` and retaining value `v`.
+
+### `TagVal.None()`
+creates a new `Option` object tagged `None` and retaining nothing.
+
+### `TagVal.Option.fromValue(v)`
+If `v` is undefined or null, it returns `None()`.
+
+Otherwise, it returns `Some(v)`.
+
+**Let `opt` be a `Option` object below:**
+
+#### `opt.map(f)`
+If `opt` is `Some()`, it returns new `Some(f(x))`.
+
+If `opt` is `None()`, it returns new `None()`.
 
 ```js
 var x = TagVal.Some(20);
 var f = function(x){ return x*x; };
 var y = x.map(f);
 console.log(y.val); // 4000
-console.log(x.val); // 20
+console.log(x.val); // 20  <- check the original object is not changed
 
 var n = TagVal.None();
 var m = n.map(f);
 console.log(m.tag); // "None"
 ```
 
-#### `prototype.getOrElse(v)`
-If tagged `Some`, it returns its retaining value.
-If tagged `None`, it returns `v`.
-Useful when you want to get specified value and default value.
+#### `opt.getOrElse(x)`
+If `opt` is `Some(v)`, it returns `v`.
+If `opt` is `None()`, it returns `x`.
+Useful when you want to get specified value or default value.
 
 ```js
 var a = TagVal.Some(20);
@@ -59,38 +80,38 @@ console.log(a.getOrElse(40)); // 20
 console.log(b.getOrElse(40)); // 40
 ```
 
-#### `prototype.getOrElseF(f)`
-If tagged `Some`, it returns its retaining value.
-If tagged `None`, it returns result of `f()`.
-This is useful if you don't want to evaluate default value unless needed.
+#### `opt.getOrElseF(f)`
+If `opt` is `Some(v)`, it returns `v`.
+If `opt` is `None()`, it returns result of `f()`.
+This is useful when you don't want to evaluate default value unless needed.
 
-#### `prototype.toArray()`
-If tagged `Some`, it returns `[v]`, where `v` is its retaining value.
-if tagged `None`, it returns `[]`.
+#### `opt.toArray()`
+If `opt` is `Some(v)`, it returns `[v]`.
+if `opt` is `None()`, it returns `[]`.
 
-#### `prototype.toStatus(msg)`
-If tagged `Some`, it returns new `Status` object tagged `Success` and retaining the same value.
-If tagged `None`, it returns new `Status` object tagged `Failure` and retaining `msg`.
+#### `opt.toStatus(msg)`
+If `opt` is `Some(v)`, it returns new `Status` object `Success(v)`.
+If `opt` is `None()`, it returns new `Status` object `Failure(msg)`.
 
-#### `prototype.match`
-#### `prototype.patch`
-#### `prototype.toString`
-#### `prototype.equal`
+#### `opt.match`
+#### `opt.patch`
+#### `opt.toString`
+#### `opt.equal`
 These are inherited method of `Matchable` class.
 
 ### `Status`
-#### `prototype.getOrThrow`
-If tagged `Success`, it returns its retaining value.
-If tagged `Failure`, it throws exception with its retaining value.
+#### `stat.getOrThrow()`
+If `stat` is `Success(v)`, it returns `v`.
+If `stat` is `Failure(msg)`, it throws `msg`.
 
-#### `prototype.toOption`
-If tagged `Success`, it returns a new `Option` object tagged `Some` and retaining the same value.
-If tagged `Failure`, it returns a new `Option` object tagged `None`.
+#### `stat.toOption`
+If `stat` is `Success(v)`, it returns a new `Option` object `Some(v)`.
+If `stat` is `Failure(msg)`, it returns a new `Option` object `None()`.
 
-#### `prototype.match`
-#### `prototype.patch`
-#### `prototype.toString`
-#### `prototype.equal`
+#### `stat.match`
+#### `stat.patch`
+#### `stat.toString`
+#### `stat.equal`
 These are inherited method of `Matchable` class.
 
 ### `Matchable`
