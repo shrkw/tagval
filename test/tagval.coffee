@@ -140,6 +140,32 @@ describe 'TagVal', ->
         n_stat = TagVal.Failure('')
         expect(n_opt.toStatus().equal(n_stat)).toBe true
 
+    describe 'toValue', ->
+
+      it "converts Some(x) to x and None() to undefined", ->
+        x_opt = TagVal.Some(3)
+        y_opt = TagVal.None()
+        expect(x_opt.toValue()).toBe 3
+        expect(y_opt.toValue()).toBe undefined
+
+    describe 'equal', ->
+
+      it "true if retaining values of two Some's, or two are both None", ->
+        a_opt = TagVal.Some(5)
+        b_opt = TagVal.Some(3)
+        c_opt = TagVal.Some(5)
+        d_opt = TagVal.None()
+        e_opt = TagVal.None()
+        f_opt = TagVal.None()
+        expect(a_opt.equal(b_opt)).toBe false
+        expect(a_opt.equal(c_opt)).toBe true
+        expect(a_opt.equal(d_opt)).toBe false
+        expect(d_opt.equal(e_opt)).toBe true
+
+        # even if someone crazily manipulates None's `val` field,
+        f_opt.val = "a hidden value of None"
+        expect(d_opt.equal(f_opt)).toBe true
+
     describe 'fromValue', ->
 
       it "converts undefined to None(), non-undefined value to Some(value)", ->

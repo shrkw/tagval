@@ -76,6 +76,18 @@ do =>
         None:    -> new Status 'Failure', msg
       , => throw "An invalid tag for Option object was found: '#{@tag}'."
 
+    # Convert to value
+    toValue: ->
+      @match
+        Some: (v)-> v
+        None:    -> undefined
+
+    # Value Equality
+    valEqual: (a)->
+      @match
+        Some: (v)-> v is a.val
+        None:    -> true
+
   # Utility constructor function
   Some = (v)-> new Option 'Some', v
   None =    -> new Option 'None'

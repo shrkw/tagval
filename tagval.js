@@ -135,6 +135,28 @@
           })(this));
         };
 
+        Option.prototype.toValue = function() {
+          return this.match({
+            Some: function(v) {
+              return v;
+            },
+            None: function() {
+              return void 0;
+            }
+          });
+        };
+
+        Option.prototype.valEqual = function(a) {
+          return this.match({
+            Some: function(v) {
+              return v === a.val;
+            },
+            None: function() {
+              return true;
+            }
+          });
+        };
+
         return Option;
 
       })(Matchable);

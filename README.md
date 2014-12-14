@@ -96,10 +96,23 @@ This is useful when you don't want to evaluate default value unless needed.
 - If `opt` is `Some(v)`, it returns new `Status` object `Success(v)`.
 - If `opt` is `None()`, it returns new `Status` object `Failure(msg)`.
 
+#### `opt.toValue()`
+- If `opt` is `Some(v)`, it returns `v`.
+- If `opt` is `None()`, it returns `undefined`.
+
+#### `opt.equal(oqt)`
+- If `opt` is `Some(v)` and `oqt` is `Some(w)`, it returns `v === w`.
+- If `opt` is `None()` and `oqt` is `None()`, it returns `true`.
+- Otherwise, `false`.
+
+If you want to check equality of two Options, this method is good choice.
+Because they're still objects, `opt === oqt` may perform unexpected judgement.
+
+It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!"
+
 #### `opt.match`
 #### `opt.patch`
 #### `opt.toString`
-#### `opt.equal`
 These are inherited method of `Matchable` class.
 
 ## Status Class
