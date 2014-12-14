@@ -88,6 +88,14 @@ do =>
         Some: (v)-> v is a.val
         None:    -> true
 
+    # Map Equality
+    mapEqual: (a, f)->
+      if @tag is a.tag
+        @match
+          Some: (v)-> f(v, a.val)
+          None:    -> true
+      else false
+
   # Utility constructor function
   Some = (v)-> new Option 'Some', v
   None =    -> new Option 'None'

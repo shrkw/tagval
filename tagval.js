@@ -157,6 +157,21 @@
           });
         };
 
+        Option.prototype.mapEqual = function(a, f) {
+          if (this.tag === a.tag) {
+            return this.match({
+              Some: function(v) {
+                return f(v, a.val);
+              },
+              None: function() {
+                return true;
+              }
+            });
+          } else {
+            return false;
+          }
+        };
+
         return Option;
 
       })(Matchable);

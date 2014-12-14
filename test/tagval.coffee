@@ -150,7 +150,7 @@ describe 'TagVal', ->
 
     describe 'equal', ->
 
-      it "true if retaining values of two Some's, or two are both None", ->
+      it "true if retaining values of two Some's are the same under (===), or two are both None", ->
         a_opt = TagVal.Some(5)
         b_opt = TagVal.Some(3)
         c_opt = TagVal.Some(5)
@@ -165,6 +165,19 @@ describe 'TagVal', ->
         # even if someone crazily manipulates None's `val` field,
         f_opt.val = "a hidden value of None"
         expect(d_opt.equal(f_opt)).toBe true
+
+    describe 'mapEqual', ->
+
+      it "true if retaining values of two Some's are the same under given function, or two are both None", ->
+        a_opt = TagVal.Some({ x: "100" });
+        b_opt = TagVal.Some({ x: "100" });
+        c_opt = TagVal.Some({ x: "50" });
+        d_opt = TagVal.None();
+        f = (a, b)-> a.x is b.x
+        expect(a_opt.equal(b_opt)).toBe false
+        expect(a_opt.mapEqual(b_opt, f)).toBe true
+        expect(a_opt.mapEqual(c_opt, f)).toBe false
+        expect(a_opt.mapEqual(d_opt, f)).toBe false
 
     describe 'fromValue', ->
 

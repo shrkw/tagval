@@ -100,15 +100,28 @@ This is useful when you don't want to evaluate default value unless needed.
 - If `opt` is `Some(v)`, it returns `v`.
 - If `opt` is `None()`, it returns `undefined`.
 
+It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!"
+
 #### `opt.equal(oqt)`
 - If `opt` is `Some(v)` and `oqt` is `Some(w)`, it returns `v === w`.
 - If `opt` is `None()` and `oqt` is `None()`, it returns `true`.
 - Otherwise, `false`.
 
-If you want to check equality of two Options, this method is good choice.
 Because they're still objects, `opt === oqt` may perform unexpected judgement.
+If you want to check equality of two Options, this method can be a good choice.
+I'm calling this equality is "under `(===)`" since values are still compared with `===`.
 
-It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!"
+Note that this method is inherited from `Matchable`.
+If you are creating new subclass of `Matchable`, you can implement `equal`'s behavior with overriding `prototype.valEqual`.
+
+#### `opt.mapEqual(oqt, f)`
+- If `opt` is `Some(v)` and `oqt` is `Some(w)`, it returns `f(v, w)`.
+- If `opt` is `None()` and `oqt` is `None()`, it returns `true`.
+- Otherwise, `false`.
+
+This is an abstract method of `opt.equal`.
+If you want to check equality of two Options, and they may have object in its value, then give an equality function to it.
+I'm calling this equality is "under `f`".
 
 #### `opt.match`
 #### `opt.patch`
