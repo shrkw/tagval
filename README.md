@@ -222,7 +222,7 @@ x_stat = try_something()
 returns `"Tag("+value+")"`
 
 #### `tv.equal(tw)`
-- If `tv` and `tw` has different tag, it returns `false`
+- If `tv` and `tw` have different tags, it returns `false`
 - Otherwise, it returns `tv.valEqual(tw)`
 
 Check two tags are same and then check value equality by `valEqual`.
