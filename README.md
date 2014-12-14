@@ -27,14 +27,14 @@ The functions to be opened are below:
 
 For example, these situations below may be when you need `Option`:
 
-- you have to find an element from an array
-- you have to handle a setting that user specifies optionally
+- finding an element from an array
+- handling a setting that user can specifiy optionally
 
 ```js
 var num_opt = find_num(); // assume it returns `Option`
 var DEFAULT = 30;
 
-// when you want to get its content with specifying default value
+// when you want to get its content with specifying default value, try
 var num = num_opt.getOrElse(DEFAULT);
 ```
 
@@ -52,9 +52,8 @@ Otherwise, it returns `Some(v)`.
 **Let `opt` be a `Option` object below:**
 
 #### `opt.map(f)`
-If `opt` is `Some()`, it returns new `Some(f(x))`.
-
-If `opt` is `None()`, it returns new `None()`.
+- If `opt` is `Some(x)`, it returns new `Some(f(x))`.
+- If `opt` is `None()`, it returns new `None()`.
 
 ```js
 var x = TagVal.Some(20);
@@ -69,8 +68,9 @@ console.log(m.tag); // "None"
 ```
 
 #### `opt.getOrElse(x)`
-If `opt` is `Some(v)`, it returns `v`.
-If `opt` is `None()`, it returns `x`.
+- If `opt` is `Some(v)`, it returns `v`.
+- If `opt` is `None()`, it returns `x`.
+
 Useful when you want to get specified value or default value.
 
 ```js
@@ -81,17 +81,18 @@ console.log(b.getOrElse(40)); // 40
 ```
 
 #### `opt.getOrElseF(f)`
-If `opt` is `Some(v)`, it returns `v`.
-If `opt` is `None()`, it returns result of `f()`.
+- If `opt` is `Some(v)`, it returns `v`.
+- If `opt` is `None()`, it returns result of `f()`.
+
 This is useful when you don't want to evaluate default value unless needed.
 
 #### `opt.toArray()`
-If `opt` is `Some(v)`, it returns `[v]`.
-if `opt` is `None()`, it returns `[]`.
+- If `opt` is `Some(v)`, it returns `[v]`.
+- if `opt` is `None()`, it returns `[]`.
 
 #### `opt.toStatus(msg)`
-If `opt` is `Some(v)`, it returns new `Status` object `Success(v)`.
-If `opt` is `None()`, it returns new `Status` object `Failure(msg)`.
+- If `opt` is `Some(v)`, it returns new `Status` object `Success(v)`.
+- If `opt` is `None()`, it returns new `Status` object `Failure(msg)`.
 
 #### `opt.match`
 #### `opt.patch`
@@ -101,12 +102,12 @@ These are inherited method of `Matchable` class.
 
 ### `Status`
 #### `stat.getOrThrow()`
-If `stat` is `Success(v)`, it returns `v`.
-If `stat` is `Failure(msg)`, it throws `msg`.
+- If `stat` is `Success(v)`, it returns `v`.
+- If `stat` is `Failure(msg)`, it throws `msg`.
 
 #### `stat.toOption`
-If `stat` is `Success(v)`, it returns a new `Option` object `Some(v)`.
-If `stat` is `Failure(msg)`, it returns a new `Option` object `None()`.
+- If `stat` is `Success(v)`, it returns a new `Option` object `Some(v)`.
+- If `stat` is `Failure(msg)`, it returns a new `Option` object `None()`.
 
 #### `stat.match`
 #### `stat.patch`
