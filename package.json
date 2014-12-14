@@ -1,8 +1,15 @@
 {
   "name": "tagval",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple JavaScript library includes Option class, Status class and their basic class of Tagged Value.",
-  "keywords": ["tagged", "tag", "discriminate", "variant", "union", "value"],
+  "keywords": [
+    "tagged",
+    "tag",
+    "discriminate",
+    "variant",
+    "union",
+    "value"
+  ],
   "url": "http://github.com/mizukami234/tagval",
   "email": "norainu234+tagval@gmail.com",
   "license": "CC-BY-4.0",
