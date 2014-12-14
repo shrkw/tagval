@@ -1,9 +1,9 @@
 TagVal (tagval.js)
 ======
 
-A simple JavaScript library includes Option class, Status class and their basic class tagged value (TagVal).
+A simple JavaScript library includes Option class, Status class and their basic class of Tagged Value.
 
-Optionクラス、Statusクラス及びその基礎的なタグ付き値のクラス(TagVal)を含む、シンプルなJavaScriptライブラリ
+Optionクラス、Statusクラス及びその基礎的なタグ付き値のクラスを含む、シンプルなJavaScriptライブラリ
 
 # Documentation
 
@@ -126,13 +126,13 @@ I'm calling this equality is "under `f`".
 #### `opt.match`
 #### `opt.patch`
 #### `opt.toString`
-These are inherited method of `Matchable` class.
+These methods are inherited from `Matchable` class. See below.
 
 ## Status Class
 ### `TagVal.Status`
 Status object is a class that express "success with result"(Success) or "failure with message"(Failure).
 
-** let `stat` be a `Status` object below:**
+**let `stat` be a `Status` object below:**
 
 #### `stat.getOrThrow()`
 - If `stat` is `Success(v)`, it returns `v`.
@@ -146,11 +146,89 @@ Status object is a class that express "success with result"(Success) or "failure
 #### `stat.patch`
 #### `stat.toString`
 #### `stat.equal`
-These are inherited method of `Matchable` class.
+These methods are inherited from `Matchable` class. See below.
 
 ## Matchable Class
 ### TagVal.Matchable
-#### `tv.match`
-#### `tv.patch`
-#### `tv.toString`
-#### `tv.equal`
+Thanks for reading here.
+
+TagVal's basic concept is regarding `{tag: String, val: Value}` as minimum tagged-value interface.
+
+`Matchable` has actually only this two fields, and they are initialized simply:
+
+```js
+var tv = new TagVal.Matchable("Tag", value); // I often express as "Tag(value)"
+
+console.log(tv.tag); // "Tag"
+console.log(tv.val); // value
+```
+
+In addition, `Matchable` has a few, generic methods below. You can inherit it. `Option` and `Status` can be simple good examples of subclass of `Matchable`.
+
+#### `tv.match(table[, default_fun])`
+- Assume `tv` is `T(v)`,
+- If `table[T]` exists, then returns `table[T](v)`.
+- If `table[T]` doesn't exists and default_fun is set, then returns `default_fun()`.
+- Otherwise, it returns `undefined`.
+
+With `Option`:
+```js
+var x_opt = find_something(); // assume it returns `Option` object
+
+var s = x_opt.match({
+  Some: function(v){ return "I found "+v+"!"; },
+  None: function(){ return "I found nothing."; }
+});
+console.log(s);
+```
+
+Gracefully in CoffeeScript:
+```coffee
+x_opt = find_something()
+
+s = x_opt.match
+  Some: (v) -> "I found #{v}!"
+  None:     -> "I found nothing."
+```
+
+#### `tv.patch(table)`
+- Assume `tv` is `T(v)`
+- If `table[T]` exists, return `table[T](v)`
+- Otherwise, it returns **object itself**.
+
+This is useful when you want to try some functions until one is succeeded.
+
+With `Status`:
+```js
+x_stat = try_something1()
+  .patch({ Failure: try_something2 })
+  .patch({ Failure: try_something3 })
+  .patch({
+    Failure: function(){ returns TagVal.Failure("Booooo!"); }
+  });
+```
+
+Gracefully in CoffeeScript:
+```js
+x_stat = try_something()
+  .patch Failure: try_something2
+  .patch Failure: try_something3
+  .patch Failure: -> TagVal.Failure "Booooo!"
+```
+
+**Let `tv` be a `Matchable` object below:**
+
+#### `tv.toString()`
+returns `"Tag("+value+")"`
+
+#### `tv.equal(tw)`
+- If `tv` and `tw` has different tag, it returns `false`
+- Otherwise, it returns `tv.valEqual(tw)`
+
+Check two tags are same and then check value equality by `valEqual`.
+
+#### `tv.valEqual(tw)`
+- It returns `tv.val === tw.val`.
+
+This method is assumed to be invoked from `equal`.
+Subclasses can implement `equal`'s behavior with overriding this method.
