@@ -216,11 +216,8 @@ describe 'TagVal', ->
 
     it "overwrites functions on global scope", ->
       TagVal.open()
-      expect(Matchable is TagVal.Matchable).toBe true
-      expect(Option is TagVal.Option).toBe true
       expect(Some is TagVal.Some).toBe true
       expect(None is TagVal.None).toBe true
-      expect(Status is TagVal.Status).toBe true
       expect(Success is TagVal.Success).toBe true
       expect(Failure is TagVal.Failure).toBe true
       TagVal.close()
@@ -230,16 +227,13 @@ describe 'TagVal', ->
     it "reverts #open's pollution over global scope", ->
       TagVal.open()
       TagVal.close()
-      expect(Matchable isnt TagVal.Matchable).toBe true
-      expect(Option isnt TagVal.Option).toBe true
       expect(Some isnt TagVal.Some).toBe true
       expect(None isnt TagVal.None).toBe true
-      expect(Status isnt TagVal.Status).toBe true
       expect(Success isnt TagVal.Success).toBe true
       expect(Failure isnt TagVal.Failure).toBe true
       
-      window.Matchable = "抹茶"
+      window.Some = "抹茶"
       TagVal.open()
-      expect(Matchable is TagVal.Matchable).toBe true      
+      expect(Some is TagVal.Some).toBe true      
       TagVal.close()
-      expect(Matchable is "抹茶").toBe true
+      expect(Some is "抹茶").toBe true

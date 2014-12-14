@@ -235,11 +235,8 @@
         return new Status('Failure', msg);
       };
       TagValOpen = {
-        Matchable: Matchable,
-        Option: Option,
         Some: Some,
         None: None,
-        Status: Status,
         Success: Success,
         Failure: Failure
       };
@@ -276,6 +273,9 @@
         return _close;
       })();
       TagVal = {
+        Matchable: Matchable,
+        Option: Option,
+        Status: Status,
         open: open,
         close: close
       };

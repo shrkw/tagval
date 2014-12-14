@@ -12,13 +12,10 @@ Sets and unsets the functions in global object.
 Original values are reverted after `close()`.
 The functions to be opened are below:
 
-- `Option`
 - `Some`
 - `None`
-- `Status`
 - `Success`
 - `Failure`
-- `Matchable`
 
 Of course, polluting global scope is **dangerous**. If you are still not a perfect lazy man, use alias instead e.g. `var T = TagVal;`.
 

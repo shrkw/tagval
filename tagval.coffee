@@ -129,11 +129,8 @@ do =>
 
   # open-able TagVal Module
   TagValOpen =
-    Matchable: Matchable
-    Option: Option
     Some: Some
     None: None
-    Status: Status
     Success: Success
     Failure: Failure
 
@@ -163,6 +160,9 @@ do =>
 
   # TagVal main Module
   TagVal =
+    Matchable: Matchable
+    Option: Option
+    Status: Status
     open: open
     close: close
   for key, val of TagValOpen
