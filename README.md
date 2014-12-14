@@ -20,6 +20,8 @@ The functions to be opened are below:
 - `Failure`
 - `Matchable`
 
+Of course, polluting global scope is **dangerous**. If you are still not a perfect lazy man, use alias instead e.g. `var T = TagVal;`.
+
 ## Option Class
 
 ### `TagVal.Option`
@@ -100,7 +102,12 @@ This is useful when you don't want to evaluate default value unless needed.
 #### `opt.equal`
 These are inherited method of `Matchable` class.
 
-### `Status`
+## Status Class
+### `TagVal.Status`
+Status object is a class that express "success with result"(Success) or "failure with message"(Failure).
+
+** let `stat` be a `Status` object below:**
+
 #### `stat.getOrThrow()`
 - If `stat` is `Success(v)`, it returns `v`.
 - If `stat` is `Failure(msg)`, it throws `msg`.
@@ -115,9 +122,9 @@ These are inherited method of `Matchable` class.
 #### `stat.equal`
 These are inherited method of `Matchable` class.
 
-### `Matchable`
-
-#### `prototype.match`
-#### `prototype.patch`
-#### `prototype.toString`
-#### `prototype.equal`
+## Matchable Class
+### TagVal.Matchable
+#### `tv.match`
+#### `tv.patch`
+#### `tv.toString`
+#### `tv.equal`
