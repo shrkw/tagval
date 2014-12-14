@@ -1,2 +1,297 @@
-(function(){var t={}.hasOwnProperty,n=function(n,o){function r(){this.constructor=n}for(var u in o)t.call(o,u)&&(n[u]=o[u]);return r.prototype=o.prototype,n.prototype=new r,n.__super__=o.prototype,n};!function(t){return function(){var o,r,u,e,i,c,a,f,s,l,h,p,m,g,v,w,y;r=function(){function t(t,n){this.tag=t,this.val=n}return t.prototype.match=function(t,n){var o;return o=t[this.tag],null!=o?o.call(this,this.val):null!=n?n.call(this):void 0},t.prototype.when=function(t){return this.match(t,function(t){return function(){return t}}(this))},t.prototype.toString=function(){return""+this.tag+"("+this.val+")"},t.prototype.equal=function(t){return this.tag===t.tag?this.valEqual(t):!1},t.prototype.valEqual=function(t){return this.val===t.val},t}(),e=function(t){function o(){return o.__super__.constructor.apply(this,arguments)}return n(o,t),o.prototype.map=function(t){return this.match({Some:function(n){return new o("Some",t(n))},None:function(){return new o("None")}},function(t){return function(){throw"An invalid tag for Option object was found: '"+t.tag+"'."}}(this))},o.prototype.getOrElse=function(t){return this.match({Some:function(t){return t},None:function(){return t}},function(t){return function(){throw"An invalid tag for Option object was found: '"+t.tag+"'."}}(this))},o.prototype.getOrElseF=function(t){return this.match({Some:function(t){return t},None:function(){return t()}},function(t){return function(){throw"An invalid tag for Option object was found: '"+t.tag+"'."}}(this))},o.prototype.toArray=function(){return this.match({Some:function(t){return[t]},None:function(){return[]}},function(t){return function(){throw"An invalid tag for Option object was found: '"+t.tag+"'."}}(this))},o.prototype.toStatus=function(t){return null==t&&(t=""),this.match({Some:function(t){return new c("Success",t)},None:function(){return new c("Failure",t)}},function(t){return function(){throw"An invalid tag for Option object was found: '"+t.tag+"'."}}(this))},o.prototype.toValue=function(){return this.match({Some:function(t){return t},None:function(){return void 0}})},o.prototype.valEqual=function(t){return this.match({Some:function(n){return n===t.val},None:function(){return!0}})},o.prototype.mapEqual=function(t,n){return this.tag===t.tag?this.match({Some:function(o){return n(o,t.val)},None:function(){return!0}}):!1},o}(r),i=function(t){return new e("Some",t)},u=function(){return new e("None")},e.fromValue=function(t){return null!=t?i(t):u()},c=function(t){function o(){return o.__super__.constructor.apply(this,arguments)}return n(o,t),o.prototype.getOrThrow=function(){return this.match({Success:function(t){return t},Failure:function(t){throw t}},function(t){return function(){throw"An invalid tag for Status object was found: '"+t.tag+"'."}}(this))},o.prototype.toOption=function(){return this.match({Success:function(t){return i(t)},Failure:function(){return u()}},function(t){return function(){throw"An invalid tag for Status object was found: '"+t.tag+"'."}}(this))},o}(r),a=function(t){return new c("Success",t)},o=function(t){return new c("Failure",t)},s={Some:i,None:u,Success:a,Failure:o},m=!1,w={},p=t,v=function(){var t;return t=function(){var t,n;if(!m){for(t in s)n=s[t],w[t]=p[t],p[t]=n;return m=!0}}}(),l=function(){var t;return t=function(){var t,n;if(m){for(t in w)n=w[t],p[t]=n;return m=!1}}}(),f={Matchable:r,Option:e,Status:c,open:v,close:l};for(g in s)y=s[g],f[g]=y;return"undefined"!=typeof h&&null!==h?("undefined"!=typeof module&&null!==module&&null!=module.exports&&(h=module.exports=f),h.TagVal=f):t.TagVal=f}}(this)()}).call(this);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRhZ3ZhbC5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkNBQUEsV0FBQSxHQUFBLE1BQUEsb0xBQUcsU0FBQSxTQUFBLFlBR0QsR0FBQSxHQUFBLEVBQUEsRUFBQSxFQUFBLEVBQUEsRUFBQSxFQUFBLEVBQUEsRUFBQSxFQUFBLEVBQUEsRUFBQSxFQUFBLEVBQUEsRUFBQSxFQUFBLENBQU0sR0FBQSxXQU1TLFFBQUEsR0FBRSxFQUFNLEdBQVAsS0FBQyxJQUFBLEVBQUssS0FBQyxJQUFBLFFBQXJCLEdBQUEsVUFHQSxNQUFPLFNBQUMsRUFBVyxHQUNqQixHQUFBLEVBQ0EsT0FEQSxHQUFNLEVBQVUsS0FBQyxLQUNkLE1BQUEsRUFBVSxFQUFJLEtBQUssS0FBRyxLQUFDLEtBQ2xCLE1BQUEsRUFBa0IsRUFBWSxLQUFLLE1BQVEsUUFOckQsRUFBQSxVQVdBLEtBQU0sU0FBQyxTQUNMLE1BQUMsTUFBTSxFQUFZLFNBQUEsU0FBQSxrQkFBRyxLQUFILFFBWnJCLEVBQUEsVUFlQSxTQUFVLGlCQUNSLEdBQUcsS0FBQyxJQUFJLElBQUcsS0FBQyxJQUFJLEtBaEJsQixFQUFBLFVBc0JBLE1BQU8sU0FBQyxHQUNOLE1BQUcsTUFBQyxNQUFPLEVBQUUsSUFBUyxLQUFDLFNBQVMsSUFBUSxHQXZCMUMsRUFBQSxVQXdCQSxTQUFVLFNBQUMsU0FDVCxNQUFDLE1BQU8sRUFBRSxVQU1SLEVBQUEsU0FBQSwyRUFJSixHQUFBLEVBQUEsR0FBQSxFQUFBLFVBQUEsSUFBSyxTQUFDLFNBQ0osTUFBQyxPQUNDLEtBQU0sU0FBQyxTQUFTLElBQUEsR0FBTyxPQUFRLEVBQUUsS0FDakMsS0FBUyxpQkFBTyxJQUFBLEdBQU8sVUFDdkIsU0FBQSxTQUFBLFlBQUcsS0FBTyxnREFBK0MsRUFBQyxJQUFJLE9BQTlELFFBSkosRUFBQSxVQU9BLFVBQVcsU0FBQyxTQUNWLE1BQUMsT0FDQyxLQUFNLFNBQUMsU0FBSyxJQUNaLEtBQVMsaUJBQUcsS0FDWixTQUFBLFNBQUEsWUFBRyxLQUFPLGdEQUErQyxFQUFDLElBQUksT0FBOUQsUUFYSixFQUFBLFVBY0EsV0FBWSxTQUFDLFNBQ1gsTUFBQyxPQUNDLEtBQU0sU0FBQyxTQUFLLElBQ1osS0FBUyxpQkFBRyxPQUNaLFNBQUEsU0FBQSxZQUFHLEtBQU8sZ0RBQStDLEVBQUMsSUFBSSxPQUE5RCxRQWxCSixFQUFBLFVBcUJBLFFBQVMsaUJBQ1AsTUFBQyxPQUNDLEtBQU0sU0FBQyxVQUFNLElBQ2IsS0FBUyxzQkFDVCxTQUFBLFNBQUEsWUFBRyxLQUFPLGdEQUErQyxFQUFDLElBQUksT0FBOUQsUUF6QkosRUFBQSxVQTRCQSxTQUFVLFNBQUMsb0JBQUEsRUFBTSxJQUNmLEtBQUMsT0FDQyxLQUFNLFNBQUMsU0FBUyxJQUFBLEdBQU8sVUFBVyxJQUNsQyxLQUFTLGlCQUFPLElBQUEsR0FBTyxVQUFXLEtBQ2xDLFNBQUEsU0FBQSxZQUFHLEtBQU8sZ0RBQStDLEVBQUMsSUFBSSxPQUE5RCxRQWhDSixFQUFBLFVBbUNBLFFBQVMsaUJBQ1AsTUFBQyxPQUNDLEtBQU0sU0FBQyxTQUFLLElBQ1osS0FBUyxpQkFBRyxZQXRDaEIsRUFBQSxVQXlDQSxTQUFVLFNBQUMsU0FDVCxNQUFDLE9BQ0MsS0FBTSxTQUFDLFNBQUssS0FBSyxFQUFFLEtBQ25CLEtBQVMsa0JBQUcsTUE1Q2hCLEVBQUEsVUErQ0EsU0FBVSxTQUFDLEVBQUcsR0FDWixNQUFHLE1BQUMsTUFBTyxFQUFFLElBQ1gsS0FBQyxPQUNDLEtBQU0sU0FBQyxTQUFLLEdBQUUsRUFBRyxFQUFFLE1BQ25CLEtBQVMsa0JBQUcsTUFDWCxNQXhEWSxHQTJEckIsRUFBTyxTQUFDLFNBQVMsSUFBQSxHQUFPLE9BQVEsSUFDaEMsRUFBVSxpQkFBTyxJQUFBLEdBQU8sU0FHeEIsRUFBTyxVQUFZLFNBQUMsR0FBSyxNQUFHLE9BQUEsRUFBUSxFQUFLLEdBQVEsS0FNM0MsRUFBQSxTQUFBLDJFQUdKLEdBQUEsRUFBQSxHQUFBLEVBQUEsVUFBQSxXQUFZLGlCQUNWLE1BQUMsT0FDQyxRQUFTLFNBQUMsU0FBTyxJQUNqQixRQUFTLFNBQUMsR0FBTyxLQUFNLEtBQ3ZCLFNBQUEsU0FBQSxZQUFHLEtBQU8sZ0RBQStDLEVBQUMsSUFBSSxPQUE5RCxRQUpKLEVBQUEsVUFPQSxTQUFVLGlCQUNSLE1BQUMsT0FDQyxRQUFTLFNBQUMsU0FBTyxHQUFLLElBQ3RCLFFBQVMsaUJBQVEsT0FDakIsU0FBQSxTQUFBLFlBQUcsS0FBTyxnREFBK0MsRUFBQyxJQUFJLE9BQTlELFdBZGUsR0FpQnJCLEVBQVUsU0FBQyxTQUFXLElBQUEsR0FBTyxVQUFXLElBQ3hDLEVBQVUsU0FBQyxTQUFXLElBQUEsR0FBTyxVQUFXLElBR3hDLEdBQ0UsS0FBTSxFQUNOLEtBQU0sRUFDTixRQUFTLEVBQ1QsUUFBUyxHQUtYLEdBQVksRUFDWixLQUNBLEVBQWUsRUFDZixFQUFVLFdBRVIsR0FBQSxTQUFBLEdBQVEsV0FDTixHQUFBLEdBQUEsQ0FBQSxLQUFHLEVBQUgsQ0FDRSxJQUFBLElBQUEsVUFDRSxFQUFlLEdBQU8sRUFBYSxHQUNuQyxFQUFhLEdBQU8sUUFDdEIsSUFBWSxPQUVsQixFQUFXLFdBRVQsR0FBQSxTQUFBLEdBQVMsV0FDUCxHQUFBLEdBQUEsQ0FBQSxJQUFHLEVBQUgsQ0FDRSxJQUFBLElBQUEsVUFDRSxFQUFhLEdBQU8sUUFDdEIsSUFBWSxPQUlsQixHQUNFLFVBQVcsRUFDWCxPQUFRLEVBQ1IsT0FBUSxFQUNSLEtBQU0sRUFDTixNQUFPLEVBQ1QsS0FBQSxJQUFBLFVBQ0UsRUFBTyxHQUFPLENBR2hCLE9BQUcsbUJBQUEsSUFBQSxPQUFBLEdBQ0UsbUJBQUEsU0FBQSxPQUFBLFFBQVksTUFBQSxPQUFBLFVBQ2IsRUFBVSxPQUFPLFFBQVUsR0FDN0IsRUFBUSxPQUFTLEdBRWpCLEVBQUMsT0FBUyxJQWhMWCIsImZpbGUiOiJ0YWd2YWwuanMiLCJzb3VyY2VzQ29udGVudCI6WyJkbyA9PlxuXG4gICMgQmFzZSBjbGFzcyBvZiB0YWdnZWQgdmFsdWVcbiAgY2xhc3MgTWF0Y2hhYmxlXG4gICAgXG4gICAgIyBDb25zdHJ1Y3RvclxuICAgICMgTWF0Y2hhYmxlIGNsYXNzIGRvZXNuJ3Qga25vdyB0aGF0IHdoYXQgdGFncyBhcmUgdmFsaWQuIFNvLCB3ZVxuICAgICMgcmVjb21tZW5kIHRvIHVzZSBNYWtlciB0byBjcmVhdGUgaW5zdGFuY2UgZ2VuZXJhdG9yIG9mIE1hdGNoYWJsZSBjbGFzc1xuICAgICMgb3IgaXRzIGV4dGVuZGVkIGNsYXNzLlxuICAgIGNvbnN0cnVjdG9yOiAoQHRhZywgQHZhbCktPlxuXG4gICAgIyBHZW5lcmFsIHRhZyBtYXRjaGluZ1xuICAgIG1hdGNoOiAoZnVuX3RhYmxlLCBmdW5fZGVmYXVsdCktPlxuICAgICAgZnVuID0gZnVuX3RhYmxlW0B0YWddXG4gICAgICBpZiBmdW4/IHRoZW4gZnVuLmNhbGwoQCwgQHZhbClcbiAgICAgIGVsc2UgaWYgZnVuX2RlZmF1bHQ/IHRoZW4gZnVuX2RlZmF1bHQuY2FsbChAKSBlbHNlIHVuZGVmaW5lZFxuXG4gICAgIyBQYXJ0aWFsIHRhZyBtYXRjaGluZ1xuICAgICMgVGhpcyBpcyBzYW1lIGFzIGBtYXRjaGAgZXhjZXB0IHRoYXQgaXQgcmV0dXJucyBvYmplY3QgaXRzZWxmXG4gICAgIyB3aGVuIHRoZSBmdW5jdGlvbiB0YWJsZSBkb2Vzbid0IGhhdmUgbWF0Y2hlZCBrZXkgZm9yIGl0cyB0YWcuXG4gICAgd2hlbjogKGZ1bl90YWJsZSktPlxuICAgICAgQG1hdGNoIGZ1bl90YWJsZSwgKD0+IEApXG5cbiAgICAjIFN0cmluZ2lmeVxuICAgIHRvU3RyaW5nOiAtPlxuICAgICAgXCIje0B0YWd9KCN7QHZhbH0pXCJcblxuICAgICMjIEVxdWFsaXR5XG4gICAgIyBZb3UgY2FuIGltcGxlbWVudCBlcXVhbGl0eSBmdW5jdGlvbiBlYXNpbHkuXG4gICAgIyBPbmx5IHlvdSBoYXZlIHRvIGRvIGlzIHRvIG92ZXJyaWRlIGB2YWxFcXVhbGAgbWV0aG9kLCB3aGljaFxuICAgICMgY2hlY2tzIG9iamVjdCdzIGB2YWxgIGVxdWFscyBhbm90aGVyIG9iamVjdCdzIGB2YWxgXG4gICAgZXF1YWw6IChhKS0+XG4gICAgICBpZiBAdGFnIGlzIGEudGFnIHRoZW4gQHZhbEVxdWFsKGEpIGVsc2UgZmFsc2VcbiAgICB2YWxFcXVhbDogKGEpLT5cbiAgICAgIEB2YWwgaXMgYS52YWxcblxuICAjIyBPcHRpb24gQ2xhc3NcbiAgIyBPcHRpb24gaXMgZ2VuZXJhbGx5IG1lYW5zIFwic29tZSB2YWx1ZSBvciBub25lXCIuXG4gICMgSXQgc2F2ZXMgcGVvcGxlIGZyb20gaGVsbCBvZiB1bmRlZmluZWQuIEFsc28gc29tZSB1dGlsaXR5IG1ldGhvZHNcbiAgIyBhcmUgaW1wbGVtZW50ZWQuXG4gIGNsYXNzIE9wdGlvbiBleHRlbmRzIE1hdGNoYWJsZVxuXG4gICAgIyBBcHBseSBmdW5jdGlvbiB0byB2YWx1ZSBvZiBTb21lXG4gICAgIyA8IFNvbWUodikgfCBOb25lID4gLT4gPCBTb21lKGYodikpIHwgTm9uZSA+XG4gICAgbWFwOiAoZiktPlxuICAgICAgQG1hdGNoXG4gICAgICAgIFNvbWU6ICh2KS0+IG5ldyBPcHRpb24gJ1NvbWUnLCBmKHYpXG4gICAgICAgIE5vbmU6ICAgIC0+IG5ldyBPcHRpb24gJ05vbmUnXG4gICAgICAsID0+IHRocm93IFwiQW4gaW52YWxpZCB0YWcgZm9yIE9wdGlvbiBvYmplY3Qgd2FzIGZvdW5kOiAnI3tAdGFnfScuXCJcblxuICAgICMgR2V0cyB2YWx1ZSBvZiBTb21lIG9yIHJldHVybnMgYSBkZWZhdWx0IHZhbHVlXG4gICAgZ2V0T3JFbHNlOiAoeCktPlxuICAgICAgQG1hdGNoXG4gICAgICAgIFNvbWU6ICh2KS0+IHZcbiAgICAgICAgTm9uZTogICAgLT4geFxuICAgICAgLCA9PiB0aHJvdyBcIkFuIGludmFsaWQgdGFnIGZvciBPcHRpb24gb2JqZWN0IHdhcyBmb3VuZDogJyN7QHRhZ30nLlwiXG5cbiAgICAjIEdldHMgdmFsdWUgb2YgU29tZSBvciByZXR1cm5zIGZ1bmN0aW9uIHJlc3VsdFxuICAgIGdldE9yRWxzZUY6IChmKS0+XG4gICAgICBAbWF0Y2hcbiAgICAgICAgU29tZTogKHYpLT4gdlxuICAgICAgICBOb25lOiAgICAtPiBmKClcbiAgICAgICwgPT4gdGhyb3cgXCJBbiBpbnZhbGlkIHRhZyBmb3IgT3B0aW9uIG9iamVjdCB3YXMgZm91bmQ6ICcje0B0YWd9Jy5cIlxuXG4gICAgIyBDb252ZXJ0IHRvIG90aGVyIHR5cGVcbiAgICB0b0FycmF5OiAtPlxuICAgICAgQG1hdGNoXG4gICAgICAgIFNvbWU6ICh2KS0+IFt2XVxuICAgICAgICBOb25lOiAgICAtPiBbXVxuICAgICAgLCA9PiB0aHJvdyBcIkFuIGludmFsaWQgdGFnIGZvciBPcHRpb24gb2JqZWN0IHdhcyBmb3VuZDogJyN7QHRhZ30nLlwiXG5cbiAgICAjIENvbnZlcnQgdG8gU3RhdHVzIHR5cGUgd2l0aCBtZXNzYWdlIG9mIEZhaWx1cmVcbiAgICB0b1N0YXR1czogKG1zZyA9IFwiXCIpLT5cbiAgICAgIEBtYXRjaFxuICAgICAgICBTb21lOiAodiktPiBuZXcgU3RhdHVzICdTdWNjZXNzJywgdlxuICAgICAgICBOb25lOiAgICAtPiBuZXcgU3RhdHVzICdGYWlsdXJlJywgbXNnXG4gICAgICAsID0+IHRocm93IFwiQW4gaW52YWxpZCB0YWcgZm9yIE9wdGlvbiBvYmplY3Qgd2FzIGZvdW5kOiAnI3tAdGFnfScuXCJcblxuICAgICMgQ29udmVydCB0byB2YWx1ZVxuICAgIHRvVmFsdWU6IC0+XG4gICAgICBAbWF0Y2hcbiAgICAgICAgU29tZTogKHYpLT4gdlxuICAgICAgICBOb25lOiAgICAtPiB1bmRlZmluZWRcblxuICAgICMgVmFsdWUgRXF1YWxpdHlcbiAgICB2YWxFcXVhbDogKGEpLT5cbiAgICAgIEBtYXRjaFxuICAgICAgICBTb21lOiAodiktPiB2IGlzIGEudmFsXG4gICAgICAgIE5vbmU6ICAgIC0+IHRydWVcblxuICAgICMgTWFwIEVxdWFsaXR5XG4gICAgbWFwRXF1YWw6IChhLCBmKS0+XG4gICAgICBpZiBAdGFnIGlzIGEudGFnXG4gICAgICAgIEBtYXRjaFxuICAgICAgICAgIFNvbWU6ICh2KS0+IGYodiwgYS52YWwpXG4gICAgICAgICAgTm9uZTogICAgLT4gdHJ1ZVxuICAgICAgZWxzZSBmYWxzZVxuXG4gICMgVXRpbGl0eSBjb25zdHJ1Y3RvciBmdW5jdGlvblxuICBTb21lID0gKHYpLT4gbmV3IE9wdGlvbiAnU29tZScsIHZcbiAgTm9uZSA9ICAgIC0+IG5ldyBPcHRpb24gJ05vbmUnXG5cbiAgIyBDcmVhdGUgT3B0aW9uIGZyb20gdW5kZWZpbmVkLWFibGUgdmFsdWVcbiAgT3B0aW9uLmZyb21WYWx1ZSA9ICh2KS0+IGlmIHY/IHRoZW4gU29tZSh2KSBlbHNlIE5vbmUoKVxuXG4gICMjIFN0YXR1cyBDbGFzc1xuICAjIFN0YXR1cyBpcyBhIHNpbXBsZSB0eXBlIHRoYXQgbWVhbnMgXCJTdWNjZXNzIG9yIEZhaWx1cmVcIi5cbiAgIyBUaGlzIGlzIHRoZSBzYW1lIGFzIE9wdGlvbiBleGNlcHQgdGhhdCBpdCBpcyBhc3N1bWVkIEZhaWx1cmUgbWF5XG4gICMgaGF2ZSBpdHMgbWVzc2FnZS4gSXQncyB1c2VmdWwgdG8gZXhwcmVzcyBBamF4IHJlc3BvbnNlcy5cbiAgY2xhc3MgU3RhdHVzIGV4dGVuZHMgTWF0Y2hhYmxlXG5cbiAgICAjIGdldCB2YWx1ZSBvZiBTdWNjZXNzIG9yIHRocm93IG1lc3NhZ2Ugb2YgRmFpbHVyZVxuICAgIGdldE9yVGhyb3c6IC0+XG4gICAgICBAbWF0Y2hcbiAgICAgICAgU3VjY2VzczogKHYpICAtPiB2XG4gICAgICAgIEZhaWx1cmU6IChtc2cpLT4gdGhyb3cgbXNnXG4gICAgICAsID0+IHRocm93IFwiQW4gaW52YWxpZCB0YWcgZm9yIFN0YXR1cyBvYmplY3Qgd2FzIGZvdW5kOiAnI3tAdGFnfScuXCJcblxuICAgICMgQ29udmVydCB0byBPcHRpb24gd2l0aCB0aHJvd2luZyBhd2F5IHRoZSBtZXNzYWdlIG9mIEZhaWx1cmUhXG4gICAgdG9PcHRpb246IC0+XG4gICAgICBAbWF0Y2hcbiAgICAgICAgU3VjY2VzczogKHYpICAtPiBTb21lKHYpXG4gICAgICAgIEZhaWx1cmU6IChtc2cpLT4gTm9uZSgpXG4gICAgICAsID0+IHRocm93IFwiQW4gaW52YWxpZCB0YWcgZm9yIFN0YXR1cyBvYmplY3Qgd2FzIGZvdW5kOiAnI3tAdGFnfScuXCJcblxuICAjIFNpbXBsZSBjb25zdHJ1Y3RvciBvZiBTdGF0dXNcbiAgU3VjY2VzcyA9ICh2KSAgLT4gbmV3IFN0YXR1cyAnU3VjY2VzcycsIHZcbiAgRmFpbHVyZSA9IChtc2cpLT4gbmV3IFN0YXR1cyAnRmFpbHVyZScsIG1zZ1xuXG4gICMgb3Blbi1hYmxlIFRhZ1ZhbCBNb2R1bGVcbiAgVGFnVmFsT3BlbiA9XG4gICAgU29tZTogU29tZVxuICAgIE5vbmU6IE5vbmVcbiAgICBTdWNjZXNzOiBTdWNjZXNzXG4gICAgRmFpbHVyZTogRmFpbHVyZVxuXG4gICMjIG9wZW4vY2xvc2UgVGFnVmFsIE1vZHVsZVxuICAjIEZvciB0aG9zZSB3aG8gd2FudCB0byB1c2UgVGFnVmFsT3BlbidzIGZ1bmN0aW9ucyAoc2VlIGFib3ZlKSB3aXRoIGdsb2JhbCxcbiAgIyBUYWdWYWwub3BlbigpIGFuZCBUYWdWYWwuY2xvc2UoKSBzZXQvdW5zZXQgdGhlbSB0byBnbG9iYWwgb2JqZWN0LlxuICBpc19vcGVuZWQgPSBmYWxzZVxuICBvcmlnaW5hbF9jYWNoZSA9IHt9XG4gIGdsb2JhbF9zY29wZSA9IEBcbiAgb3BlbiA9IGRvID0+XG4gICAgIyBtYWluIG9wZW4gZnVuY3Rpb25cbiAgICBfb3BlbiA9IC0+XG4gICAgICBpZiBub3QgaXNfb3BlbmVkXG4gICAgICAgIGZvciBrZXksIHZhbCBvZiBUYWdWYWxPcGVuXG4gICAgICAgICAgb3JpZ2luYWxfY2FjaGVba2V5XSA9IGdsb2JhbF9zY29wZVtrZXldXG4gICAgICAgICAgZ2xvYmFsX3Njb3BlW2tleV0gPSB2YWxcbiAgICAgICAgaXNfb3BlbmVkID0gdHJ1ZVxuICAgIF9vcGVuXG4gIGNsb3NlID0gZG8gPT5cbiAgICAjIG1haW4gY2xvc2UgZnVuY3Rpb25cbiAgICBfY2xvc2UgPSAtPlxuICAgICAgaWYgaXNfb3BlbmVkXG4gICAgICAgIGZvciBrZXksIHZhbCBvZiBvcmlnaW5hbF9jYWNoZVxuICAgICAgICAgIGdsb2JhbF9zY29wZVtrZXldID0gdmFsXG4gICAgICAgIGlzX29wZW5lZCA9IGZhbHNlXG4gICAgX2Nsb3NlXG5cbiAgIyBUYWdWYWwgbWFpbiBNb2R1bGVcbiAgVGFnVmFsID1cbiAgICBNYXRjaGFibGU6IE1hdGNoYWJsZVxuICAgIE9wdGlvbjogT3B0aW9uXG4gICAgU3RhdHVzOiBTdGF0dXNcbiAgICBvcGVuOiBvcGVuXG4gICAgY2xvc2U6IGNsb3NlXG4gIGZvciBrZXksIHZhbCBvZiBUYWdWYWxPcGVuXG4gICAgVGFnVmFsW2tleV0gPSB2YWxcblxuICAjIEV4cG9ydCBUYWdWYWwgZm9yIE5vZGUuanNcbiAgaWYgZXhwb3J0cz9cbiAgICBpZiBtb2R1bGU/IGFuZCBtb2R1bGUuZXhwb3J0cz9cbiAgICAgIGV4cG9ydHMgPSBtb2R1bGUuZXhwb3J0cyA9IFRhZ1ZhbFxuICAgIGV4cG9ydHMuVGFnVmFsID0gVGFnVmFsXG4gIGVsc2VcbiAgICBAVGFnVmFsID0gVGFnVmFsXG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  (function(_this) {
+    return (function() {
+      var Failure, Matchable, None, Option, Some, Status, Success, TagVal, TagValOpen, close, exports, global_scope, is_opened, key, open, original_cache, val;
+      Matchable = (function() {
+        function Matchable(tag, val) {
+          this.tag = tag;
+          this.val = val;
+        }
+
+        Matchable.prototype.match = function(fun_table, fun_default) {
+          var fun;
+          fun = fun_table[this.tag];
+          if (fun != null) {
+            return fun.call(this, this.val);
+          } else if (fun_default != null) {
+            return fun_default.call(this);
+          } else {
+            return void 0;
+          }
+        };
+
+        Matchable.prototype.when = function(fun_table) {
+          return this.match(fun_table, ((function(_this) {
+            return function() {
+              return _this;
+            };
+          })(this)));
+        };
+
+        Matchable.prototype.toString = function() {
+          return "" + this.tag + "(" + this.val + ")";
+        };
+
+        Matchable.prototype.equal = function(a) {
+          if (this.tag === a.tag) {
+            return this.valEqual(a);
+          } else {
+            return false;
+          }
+        };
+
+        Matchable.prototype.valEqual = function(a) {
+          return this.val === a.val;
+        };
+
+        return Matchable;
+
+      })();
+      Option = (function(_super) {
+        __extends(Option, _super);
+
+        function Option() {
+          return Option.__super__.constructor.apply(this, arguments);
+        }
+
+        Option.prototype.map = function(f) {
+          return this.match({
+            Some: function(v) {
+              return new Option('Some', f(v));
+            },
+            None: function() {
+              return new Option('None');
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Option object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Option.prototype.getOrElse = function(x) {
+          return this.match({
+            Some: function(v) {
+              return v;
+            },
+            None: function() {
+              return x;
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Option object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Option.prototype.getOrElseF = function(f) {
+          return this.match({
+            Some: function(v) {
+              return v;
+            },
+            None: function() {
+              return f();
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Option object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Option.prototype.toArray = function() {
+          return this.match({
+            Some: function(v) {
+              return [v];
+            },
+            None: function() {
+              return [];
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Option object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Option.prototype.toStatus = function(msg) {
+          if (msg == null) {
+            msg = "";
+          }
+          return this.match({
+            Some: function(v) {
+              return new Status('Success', v);
+            },
+            None: function() {
+              return new Status('Failure', msg);
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Option object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Option.prototype.toValue = function() {
+          return this.match({
+            Some: function(v) {
+              return v;
+            },
+            None: function() {
+              return void 0;
+            }
+          });
+        };
+
+        Option.prototype.valEqual = function(a) {
+          return this.match({
+            Some: function(v) {
+              return v === a.val;
+            },
+            None: function() {
+              return true;
+            }
+          });
+        };
+
+        Option.prototype.mapEqual = function(a, f) {
+          if (this.tag === a.tag) {
+            return this.match({
+              Some: function(v) {
+                return f(v, a.val);
+              },
+              None: function() {
+                return true;
+              }
+            });
+          } else {
+            return false;
+          }
+        };
+
+        return Option;
+
+      })(Matchable);
+      Some = function(v) {
+        return new Option('Some', v);
+      };
+      None = function() {
+        return new Option('None');
+      };
+      Option.fromValue = function(v) {
+        if (v != null) {
+          return Some(v);
+        } else {
+          return None();
+        }
+      };
+      Status = (function(_super) {
+        __extends(Status, _super);
+
+        function Status() {
+          return Status.__super__.constructor.apply(this, arguments);
+        }
+
+        Status.prototype.getOrThrow = function() {
+          return this.match({
+            Success: function(v) {
+              return v;
+            },
+            Failure: function(msg) {
+              throw msg;
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Status object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        Status.prototype.toOption = function() {
+          return this.match({
+            Success: function(v) {
+              return Some(v);
+            },
+            Failure: function(msg) {
+              return None();
+            }
+          }, (function(_this) {
+            return function() {
+              throw "An invalid tag for Status object was found: '" + _this.tag + "'.";
+            };
+          })(this));
+        };
+
+        return Status;
+
+      })(Matchable);
+      Success = function(v) {
+        return new Status('Success', v);
+      };
+      Failure = function(msg) {
+        return new Status('Failure', msg);
+      };
+      TagValOpen = {
+        Some: Some,
+        None: None,
+        Success: Success,
+        Failure: Failure
+      };
+      is_opened = false;
+      original_cache = {};
+      global_scope = _this;
+      open = (function() {
+        var _open;
+        _open = function() {
+          var key, val;
+          if (!is_opened) {
+            for (key in TagValOpen) {
+              val = TagValOpen[key];
+              original_cache[key] = global_scope[key];
+              global_scope[key] = val;
+            }
+            return is_opened = true;
+          }
+        };
+        return _open;
+      })();
+      close = (function() {
+        var _close;
+        _close = function() {
+          var key, val;
+          if (is_opened) {
+            for (key in original_cache) {
+              val = original_cache[key];
+              global_scope[key] = val;
+            }
+            return is_opened = false;
+          }
+        };
+        return _close;
+      })();
+      TagVal = {
+        Matchable: Matchable,
+        Option: Option,
+        Status: Status,
+        open: open,
+        close: close
+      };
+      for (key in TagValOpen) {
+        val = TagValOpen[key];
+        TagVal[key] = val;
+      }
+      if (typeof exports !== "undefined" && exports !== null) {
+        if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
+          exports = module.exports = TagVal;
+        }
+        return exports.TagVal = TagVal;
+      } else {
+        return _this.TagVal = TagVal;
+      }
+    });
+  })(this)();
+
+}).call(this);
