@@ -18,7 +18,7 @@ do =>
     # Partial tag matching
     # This is same as `match` except that it returns object itself
     # when the function table doesn't have matched key for its tag.
-    patch: (fun_table)->
+    when: (fun_table)->
       @match fun_table, (=> @)
 
     # Stringify

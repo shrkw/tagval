@@ -24,15 +24,15 @@ describe 'TagVal', ->
         , -> 300  # default function here
         expect(z).toBe 300
 
-    describe 'patch', ->
+    describe 'when', ->
 
       it "executes matched tag's function", ->
         a = new TagVal.Matchable 'Good', 100
         b = new TagVal.Matchable 'Bad', 0
-        x = a.patch
+        x = a.when
           Good: (v)-> v+10
           Bad: (v)-> v+20
-        y = b.patch
+        y = b.when
           Good: (v)-> v+10
           Bad: (v)-> v+20
         expect(x).toBe 110
@@ -40,7 +40,7 @@ describe 'TagVal', ->
 
       it "returns arg's function if tag doesn't match", ->
         c = new TagVal.Matchable 'Good', 200
-        z = c.patch
+        z = c.when
           Bad: (v)-> 10
         expect(z.tag).toBe 'Good'
         expect(z.val).toBe 200

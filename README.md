@@ -121,7 +121,7 @@ If you want to check equality of two Options, and they may have object in its va
 I'm calling this equality is "under `f`".
 
 #### `opt.match`
-#### `opt.patch`
+#### `opt.when`
 #### `opt.toString`
 These methods are inherited from `Matchable` class. See below.
 
@@ -140,7 +140,7 @@ Status object is a class that express "success with result"(Success) or "failure
 - If `stat` is `Failure(msg)`, it returns a new `Option` object `None()`.
 
 #### `stat.match`
-#### `stat.patch`
+#### `stat.when`
 #### `stat.toString`
 #### `stat.equal`
 These methods are inherited from `Matchable` class. See below.
@@ -188,7 +188,7 @@ s = x_opt.match
   None:     -> "I found nothing."
 ```
 
-#### `tv.patch(table)`
+#### `tv.when(table)`
 - Assume `tv` is `T(v)`
 - If `table[T]` exists, return `table[T](v)`
 - Otherwise, it returns **object itself**.
@@ -198,9 +198,9 @@ This is useful when you want to try some functions until one is succeeded.
 With `Status`:
 ```js
 x_stat = try_something1()
-  .patch({ Failure: try_something2 })
-  .patch({ Failure: try_something3 })
-  .patch({
+  .when({ Failure: try_something2 })
+  .when({ Failure: try_something3 })
+  .when({
     Failure: function(){ returns TagVal.Failure("Booooo!"); }
   });
 ```
@@ -208,9 +208,9 @@ x_stat = try_something1()
 Gracefully in CoffeeScript:
 ```js
 x_stat = try_something()
-  .patch Failure: try_something2
-  .patch Failure: try_something3
-  .patch Failure: -> TagVal.Failure "Booooo!"
+  .when Failure: try_something2
+  .when Failure: try_something3
+  .when Failure: -> TagVal.Failure "Booooo!"
 ```
 
 **Let `tv` be a `Matchable` object below:**

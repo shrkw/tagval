@@ -23,7 +23,7 @@
           }
         };
 
-        Matchable.prototype.patch = function(fun_table) {
+        Matchable.prototype.when = function(fun_table) {
           return this.match(fun_table, ((function(_this) {
             return function() {
               return _this;
