@@ -229,3 +229,6 @@ The functions to be opened are below:
 - `Failure`
 
 Of course, polluting global scope is **dangerous**. If you are still not a perfect lazy man, use alias instead e.g. `var T = TagVal;`.
+
+[travis-url]: https://travis-ci.org/mizukami234/tagval
+[travis-image]: http://img.shields.io/travis/mizukami234/tagval.svg
