@@ -5,6 +5,28 @@ A simple JavaScript library includes Option class, Status class and their basic 
 
 Optionクラス、Statusクラス及びその基礎的なタグ付き値のクラスを含む、シンプルなJavaScriptライブラリ
 
+# Getting Started
+
+```js
+var T = require('tagval');
+
+// with underscore.js
+var ar = [3, 5, 6];
+function is_even(x){ return x%2 === 0; }
+function is_lt_10(x){ return (x > 10); }
+
+var x_opt = T.Option.fromValue(_.find(ar, is_even));
+var y_opt = T.Option.fromValue(_.find(ar, is_lt_10));
+
+x_opt.match({
+  Some: function(x){ console.log("I got "+x); },
+  None: function(){ console.log("nothing"); }
+});  // "I got 6"
+
+var y = y_opt.getOrElse(10);
+console.log(y); // 10
+```
+
 # Documentation
 
 ## Option Class
@@ -12,7 +34,7 @@ Optionクラス、Statusクラス及びその基礎的なタグ付き値のク�
 ### `TagVal.Option`
 `Option` is a class that expresses "there is something"(Some) or "there is nothing"(None). In fact, this class is a subclass of `Matchable`, which is tagged-value implementation.
 
-For example, these situations below may be when you need `Option`:
+For example, following situations may be when you need `Option`:
 
 - finding an element from an array
 - handling a setting that user can specifiy optionally
@@ -47,7 +69,7 @@ var x = TagVal.Some(20);
 var f = function(x){ return x*x; };
 var y = x.map(f);
 console.log(y.val); // 4000
-console.log(x.val); // 20  <- check the original object is not changed
+console.log(x.val); // 20  <- note that the original object doesn't change
 
 var n = TagVal.None();
 var m = n.map(f);
@@ -58,7 +80,8 @@ console.log(m.tag); // "None"
 - If `opt` is `Some(v)`, it returns `v`.
 - If `opt` is `None()`, it returns `x`.
 
-Useful when you want to get specified value or default value.
+Useful when you want to get value with specifying a default value.
+This is a method which will save you from unexpected `undefined`.
 
 ```js
 var a = TagVal.Some(20);
@@ -72,6 +95,7 @@ console.log(b.getOrElse(40)); // 40
 - If `opt` is `None()`, it returns result of `f()`.
 
 This is useful when you don't want to evaluate default value unless needed.
+This is a method which will save you from unexpected `undefined`.
 
 #### `opt.toArray()`
 - If `opt` is `Some(v)`, it returns `[v]`.
@@ -85,7 +109,8 @@ This is useful when you don't want to evaluate default value unless needed.
 - If `opt` is `Some(v)`, it returns `v`.
 - If `opt` is `None()`, it returns `undefined`.
 
-It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!"
+It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!".
+This method is safer than `opt.val` because it can't be certified that val of None is always undefined.
 
 #### `opt.equal(oqt)`
 - If `opt` is `Some(v)` and `oqt` is `Some(w)`, it returns `v === w`.
