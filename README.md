@@ -27,6 +27,28 @@ var y = y_opt.getOrElse(10);
 console.log(y); // 10
 ```
 
+Gracefully in CoffeeScript:
+
+```js
+T = require 'tagval'
+
+# with underscore.js
+ar = [3, 5, 6]
+is_even = (x)-> x%2 is 0
+is_lt_10 = (x)-> (x > 10)
+
+x_opt = T.Option.fromValue _.find(ar, is_even)
+y_opt = T.Option.fromValue _.find(ar, is_lt_10)
+
+x_opt.match
+  Some: (x)-> console.log "I got #{x}"
+  None:    -> console.log "nothing"
+# "I got 6"
+
+y = y_opt.getOrElse 10
+console.log y // 10
+```
+
 # Documentation
 
 ## Option Class
