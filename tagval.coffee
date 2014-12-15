@@ -170,8 +170,6 @@ do =>
 
   # Export TagVal for Node.js
   if exports?
-    if module? and module.exports?
-      exports = module.exports = TagVal
-    exports.TagVal = TagVal
+    exports = TagVal
   else
     @TagVal = TagVal

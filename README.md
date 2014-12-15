@@ -7,18 +7,6 @@ Optionクラス、Statusクラス及びその基礎的なタグ付き値のク�
 
 # Documentation
 
-#### `TagVal.open()` / `TagVal.close()`
-Sets and unsets the functions in global object.
-Original values are reverted after `close()`.
-The functions to be opened are below:
-
-- `Some`
-- `None`
-- `Success`
-- `Failure`
-
-Of course, polluting global scope is **dangerous**. If you are still not a perfect lazy man, use alias instead e.g. `var T = TagVal;`.
-
 ## Option Class
 
 ### `TagVal.Option`
@@ -229,3 +217,15 @@ Check two tags are same and then check value equality by `valEqual`.
 
 This method is assumed to be invoked from `equal`.
 Subclasses can implement `equal`'s behavior with overriding this method.
+
+#### `TagVal.open()` / `TagVal.close()`
+Sets and unsets the functions in global object.
+Original values are reverted after `close()`.
+The functions to be opened are below:
+
+- `Some`
+- `None`
+- `Success`
+- `Failure`
+
+Of course, polluting global scope is **dangerous**. If you are still not a perfect lazy man, use alias instead e.g. `var T = TagVal;`.
