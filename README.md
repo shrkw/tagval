@@ -1,4 +1,4 @@
-TagVal (tagval.js)
+TagVal (tagval.js)  [![Build Status][travis-image]][travis-url]
 ======
 
 A simple JavaScript library includes Option class, Status class and their basic class of Tagged Value.
