@@ -233,19 +233,19 @@ This is useful when you want to try some functions until one is succeeded.
 With `Status`:
 ```js
 x_stat = try_something1()
-  .when({ Failure: try_something2 })
-  .when({ Failure: try_something3 })
+  .when({ Failure: function(){ return try_something2(); } })
+  .when({ Failure: function(){ return try_something3(); } })
   .when({
-    Failure: function(){ returns TagVal.Failure("Booooo!"); }
+    Failure: function(){ returns TagVal.Failure("All tries failed."); }
   });
 ```
 
 Gracefully in CoffeeScript:
 ```js
-x_stat = try_something()
-  .when Failure: try_something2
-  .when Failure: try_something3
-  .when Failure: -> TagVal.Failure "Booooo!"
+x_stat = try_something1()
+  .when Failure: -> try_something2()
+  .when Failure: -> try_something3()
+  .when Failure: -> TagVal.Failure "All tries failed."
 ```
 
 **Let `tv` be a `Matchable` object below:**
