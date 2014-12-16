@@ -171,5 +171,6 @@ do =>
   # Export TagVal for Node.js
   if exports?
     exports = TagVal
+    exports.TagVal = TagVal
   else
     @TagVal = TagVal

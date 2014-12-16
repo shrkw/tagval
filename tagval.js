@@ -284,9 +284,7 @@
         TagVal[key] = val;
       }
       if (typeof exports !== "undefined" && exports !== null) {
-        if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
-          exports = module.exports = TagVal;
-        }
+        exports = TagVal;
         return exports.TagVal = TagVal;
       } else {
         return _this.TagVal = TagVal;
