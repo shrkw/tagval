@@ -69,16 +69,17 @@ var DEFAULT = 30;
 var num = num_opt.getOrElse(DEFAULT);
 ```
 
-### `TagVal.Some(v)`
+#### `TagVal.Some(v)`
 creates a new `Option` object tagged `Some` and retaining value `v`.
 
-### `TagVal.None()`
+#### `TagVal.None()`
 creates a new `Option` object tagged `None` and retaining nothing.
 
-### `TagVal.Option.fromValue(v)`
-If `v` is undefined or null, it returns `None()`.
+#### `TagVal.Option.fromValue(v)`
+##### alias: `TagVal.optionFrom`
 
-Otherwise, it returns `Some(v)`.
+- If `v` is undefined or null, it returns `None()`.
+- Otherwise, it returns `Some(v)`.
 
 **Let `opt` be a `Option` object below:**
 
@@ -282,7 +283,10 @@ console.log col(tv4) // to be 2
 console.log col(tv5) // to be 16
 ```
 
-## For Addicted
+#### `TagVal.optionFrom(v)`
+##### alias of `TagVal.Option.fromValue`
+
+## For Addicteds
 
 #### `TagVal.open()` / `TagVal.close()`
 Sets and unsets the functions in global object.

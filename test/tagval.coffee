@@ -223,6 +223,10 @@ describe 'TagVal', ->
       expect(col(tv4)).toBe 2
       expect(col(tv5)).toBe 16
       
+  describe 'optionFrom', ->
+
+    it "is same as Option.fromValue", ->
+      expect(TagVal.optionFrom is TagVal.Option.fromValue).toBe true
 
   describe 'open', ->
 

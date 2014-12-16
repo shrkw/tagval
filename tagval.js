@@ -290,6 +290,7 @@
         Option: Option,
         Status: Status,
         match: match,
+        optionFrom: Option.fromValue,
         open: open,
         close: close
       };
