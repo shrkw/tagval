@@ -81,6 +81,8 @@ creates a new `Option` object tagged `None` and retaining nothing.
 - If `v` is undefined or null, it returns `None()`.
 - Otherwise, it returns `Some(v)`.
 
+You can use also `new TagVal.Option(v)`.
+
 **Let `opt` be a `Option` object below:**
 
 #### `opt.map(f)`
@@ -133,7 +135,7 @@ This is a method which will save you from unexpected `undefined`.
 - If `opt` is `None()`, it returns `undefined`.
 
 It's useful when you are irritating such as "IT HAS SOME VALUE OBVIOUSLY!".
-This method is safer than `opt.val` because it can't be certified that val of None is always undefined.
+This method is a bit safer than `opt.val`.
 
 #### `opt.equal(oqt)`
 - If `opt` is `Some(v)` and `oqt` is `Some(w)`, it returns `v === w`.
@@ -142,7 +144,7 @@ This method is safer than `opt.val` because it can't be certified that val of No
 
 Because they're still objects, `opt === oqt` may perform unexpected judgement.
 If you want to check equality of two Options, this method can be a good choice.
-I'm calling this equality is "under `(===)`" since values are still compared with `===`.
+I often call it an equality "under `(===)`" since values are still compared with `===`.
 
 Note that this method is inherited from `Matchable`.
 If you are creating new subclass of `Matchable`, you can implement `equal`'s behavior with overriding `prototype.valEqual`.
@@ -154,7 +156,7 @@ If you are creating new subclass of `Matchable`, you can implement `equal`'s beh
 
 This is an abstract method of `opt.equal`.
 If you want to check equality of two Options, and they may have object in its value, then give an equality function to it.
-I'm calling this equality is "under `f`".
+I often call it an equality "under `f`".
 
 #### `opt.match`
 #### `opt.when`
