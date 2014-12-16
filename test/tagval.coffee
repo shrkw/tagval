@@ -86,7 +86,7 @@ describe 'TagVal', ->
 
     describe 'map', ->
 
-      it "apply function into value of Some", ->
+      it "applies function into value of Some", ->
         x_opt = TagVal.Some(3)
         y_opt = TagVal.None()
         f = (x) -> x*x

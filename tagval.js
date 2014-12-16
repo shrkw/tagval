@@ -53,17 +53,21 @@
       Option = (function(_super) {
         __extends(Option, _super);
 
-        function Option() {
-          return Option.__super__.constructor.apply(this, arguments);
+        function Option(v) {
+          if (v != null) {
+            Option.__super__.constructor.call(this, 'Some', v);
+          } else {
+            Option.__super__.constructor.call(this, 'None');
+          }
         }
 
         Option.prototype.map = function(f) {
           return this.match({
             Some: function(v) {
-              return new Option('Some', f(v));
+              return new Option(f(v));
             },
             None: function() {
-              return new Option('None');
+              return new Option(void 0);
             }
           }, (function(_this) {
             return function() {
@@ -176,17 +180,13 @@
 
       })(Matchable);
       Some = function(v) {
-        return new Option('Some', v);
+        return new Option(v);
       };
       None = function() {
-        return new Option('None');
+        return new Option(void 0);
       };
       Option.fromValue = function(v) {
-        if (v != null) {
-          return Some(v);
-        } else {
-          return None();
-        }
+        return new Option(v);
       };
       Status = (function(_super) {
         __extends(Status, _super);

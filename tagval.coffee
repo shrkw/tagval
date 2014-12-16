@@ -40,12 +40,16 @@ do =>
   # are implemented.
   class Option extends Matchable
 
+    # Constructor
+    constructor: (v)->
+      if v? then super('Some', v) else super('None')
+
     # Apply function to value of Some
     # < Some(v) | None > -> < Some(f(v)) | None >
     map: (f)->
       @match
-        Some: (v)-> new Option 'Some', f(v)
-        None:    -> new Option 'None'
+        Some: (v)-> new Option f(v)
+        None:    -> new Option undefined
       , => throw "An invalid tag for Option object was found: '#{@tag}'."
 
     # Gets value of Some or returns a default value
@@ -97,11 +101,11 @@ do =>
       else false
 
   # Utility constructor function
-  Some = (v)-> new Option 'Some', v
-  None =    -> new Option 'None'
+  Some = (v)-> new Option v
+  None =    -> new Option undefined
 
   # Create Option from undefined-able value
-  Option.fromValue = (v)-> if v? then Some(v) else None()
+  Option.fromValue = (v)-> new Option v
 
   ## Status Class
   # Status is a simple type that means "Success or Failure".
