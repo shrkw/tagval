@@ -1,6 +1,6 @@
 {
   "name": "tagval",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A simple JavaScript library includes Option class, Status class and their basic class of Tagged Value.",
   "keywords": [
     "tagged",
