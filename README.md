@@ -13,18 +13,18 @@ var T = require('tagval');
 // with underscore.js
 var ar = [3, 5, 6];
 function is_even(x){ return x%2 === 0; }
-function is_lt_10(x){ return (x > 10); }
+function is_gt_10(x){ return (x > 10); }
 
 var x_opt = T.Option.fromValue(_.find(ar, is_even));
-var y_opt = T.Option.fromValue(_.find(ar, is_lt_10));
+var y_opt = T.Option.fromValue(_.find(ar, is_gt_10));
 
 x_opt.match({
   Some: function(x){ console.log("I got "+x); },
   None: function(){ console.log("nothing"); }
-});  // "I got 6"
+});  // output: I got 6
 
 var y = y_opt.getOrElse(10);
-console.log(y); // 10
+console.log(y); // output: 10
 ```
 
 Gracefully in CoffeeScript:
@@ -35,18 +35,18 @@ T = require 'tagval'
 # with underscore.js
 ar = [3, 5, 6]
 is_even = (x)-> x%2 is 0
-is_lt_10 = (x)-> (x > 10)
+is_gt_10 = (x)-> (x > 10)
 
 x_opt = T.Option.fromValue _.find(ar, is_even)
-y_opt = T.Option.fromValue _.find(ar, is_lt_10)
+y_opt = T.Option.fromValue _.find(ar, is_gt_10)
 
 x_opt.match
   Some: (x)-> console.log "I got #{x}"
   None:    -> console.log "nothing"
-# "I got 6"
+# output: I got 6
 
 y = y_opt.getOrElse 10
-console.log y // 10
+console.log y # output: 10
 ```
 
 # Documentation
@@ -93,12 +93,12 @@ You can use also `new TagVal.Option(v)`.
 var x = TagVal.Some(20);
 var f = function(x){ return x*x; };
 var y = x.map(f);
-console.log(y.val); // 4000
-console.log(x.val); // 20  <- note that the original object doesn't change
+console.log(y.val); // output: 4000
+console.log(x.val); // output: 20  <- the original object doesn't change
 
 var n = TagVal.None();
 var m = n.map(f);
-console.log(m.tag); // "None"
+console.log(m.tag); // output: None
 ```
 
 #### `opt.getOrElse(x)`
@@ -111,8 +111,8 @@ This is a method which will save you from unexpected `undefined`.
 ```js
 var a = TagVal.Some(20);
 var b = TagVal.None();
-console.log(a.getOrElse(40)); // 20
-console.log(b.getOrElse(40)); // 40
+console.log(a.getOrElse(40)); // output: 20
+console.log(b.getOrElse(40)); // output: 40
 ```
 
 #### `opt.getOrElseF(f)`
@@ -192,10 +192,11 @@ TagVal's basic concept is regarding `{tag: String, val: Value}` as minimum tagge
 `Matchable` has actually only this two fields, and they are initialized simply:
 
 ```js
+var value = "some value"
 var tv = new TagVal.Matchable("Tag", value); // I often express as "Tag(value)"
 
-console.log(tv.tag); // "Tag"
-console.log(tv.val); // value
+console.log(tv.tag); // output: Tag
+console.log(tv.val); // output: some value
 ```
 
 In addition, `Matchable` has a few, generic methods below. You can inherit it. `Option` and `Status` can be simple good examples of subclass of `Matchable`.
@@ -224,6 +225,7 @@ x_opt = find_something()
 s = x_opt.match
   Some: (v) -> "I found #{v}!"
   None:     -> "I found nothing."
+console.log s
 ```
 
 #### `tv.when(table)`
@@ -281,8 +283,8 @@ col = (tv)->
   TagVal.match(tv)
     even: (v)-> v/2
     odd:  (v)-> 3*v+1
-console.log col(tv4) // to be 2
-console.log col(tv5) // to be 16
+console.log col(tv4) # output: 2
+console.log col(tv5) # output: 16
 ```
 
 #### `TagVal.optionFrom(v)`
