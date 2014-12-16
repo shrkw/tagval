@@ -107,6 +107,9 @@ do =>
   # Create Option from undefined-able value
   Option.fromValue = (v)-> new Option v
 
+  # Create Option from Boolean value. true to Some(true), false to None.
+  Option.fromBool = (v)-> if v then Some true else None()
+
   ## Status Class
   # Status is a simple type that means "Success or Failure".
   # This is the same as Option except that it is assumed Failure may

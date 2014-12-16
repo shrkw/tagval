@@ -83,6 +83,11 @@ creates a new `Option` object tagged `None` and retaining nothing.
 
 You can use also `new TagVal.Option(v)`.
 
+#### `TagVal.Option.fromBool(v)`
+
+- If `v` is truthy, it returns `Some(true)`
+- Otherwise, it returns `None()`
+
 **Let `opt` be a `Option` object below:**
 
 #### `opt.map(f)`

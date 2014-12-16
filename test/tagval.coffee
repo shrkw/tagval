@@ -189,6 +189,16 @@ describe 'TagVal', ->
         expect(TagVal.Option.fromValue(x).equal(x_opt)).toBe true
         expect(TagVal.Option.fromValue(y).equal(y_opt)).toBe true
 
+    describe 'fromBool', ->
+
+      it "converts truthy to Some(true), falsy to None()", ->
+        x_opt = TagVal.Option.fromBool true
+        y_opt = TagVal.Option.fromBool false
+        x_to_be = TagVal.Some true
+        y_to_be = TagVal.None()
+        expect(x_opt.equal(x_to_be)).toBe true
+        expect(y_opt.equal(y_to_be)).toBe true
+
   describe 'Status', ->
 
     describe 'getOrThrow', ->
