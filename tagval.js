@@ -188,6 +188,13 @@
       Option.fromValue = function(v) {
         return new Option(v);
       };
+      Option.fromBool = function(v) {
+        if (v) {
+          return Some(true);
+        } else {
+          return None();
+        }
+      };
       Status = (function(_super) {
         __extends(Status, _super);
 
