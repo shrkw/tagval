@@ -265,6 +265,23 @@ Check two tags are same and then check value equality by `valEqual`.
 This method is assumed to be invoked from `equal`.
 Subclasses can implement `equal`'s behavior with overriding this method.
 
+## Functional Utilities
+
+#### `TagVal.match(tv)(table)`
+It is applicable to arbitrary `{ tag: Tag, val: Value }` object.
+
+In CoffeeScript:
+```coffee
+tv4 = { tag: "even" , val: 4 }
+tv5 = { tag: "odd" , val: 5 }
+col = (tv)->
+  TagVal.match(tv)
+    even: (v)-> v/2
+    odd:  (v)-> 3*v+1
+expect(col(tv4)).toBe 2
+expect(col(tv5)).toBe 16
+```
+
 #### `TagVal.open()` / `TagVal.close()`
 Sets and unsets the functions in global object.
 Original values are reverted after `close()`.

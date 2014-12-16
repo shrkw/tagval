@@ -127,6 +127,13 @@ do =>
   Success = (v)  -> new Status 'Success', v
   Failure = (msg)-> new Status 'Failure', msg
 
+  # Functional Utilities
+  match = (tagval)->
+    (fun_table, fun_default)-> 
+      fun = fun_table[tagval.tag]
+      if fun? then fun.call(tagval, tagval.val)
+      else if fun_default? then fun_default.call(tagval) else undefined
+
   # open-able TagVal Module
   TagValOpen =
     Some: Some
@@ -163,6 +170,7 @@ do =>
     Matchable: Matchable
     Option: Option
     Status: Status
+    match: match
     open: open
     close: close
   for key, val of TagValOpen

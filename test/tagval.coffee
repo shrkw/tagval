@@ -212,6 +212,18 @@ describe 'TagVal', ->
         expect(x_stat.toOption().equal(x_opt)).toBe true
         expect(y_stat.toOption().equal(y_opt)).toBe true
 
+  describe 'match', ->
+
+    it "gets { tag: Tag, val: Value } style object and returns function performs like Matchable#match", ->
+      tv4 = { tag: "even" , val: 4 }
+      tv5 = { tag: "odd" , val: 5 }
+      col = (tv)-> TagVal.match(tv)
+        even: (v)-> v/2
+        odd:  (v)-> 3*v+1
+      expect(col(tv4)).toBe 2
+      expect(col(tv5)).toBe 16
+      
+
   describe 'open', ->
 
     it "overwrites functions on global scope", ->

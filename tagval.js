@@ -4,7 +4,7 @@
 
   (function(_this) {
     return (function() {
-      var Failure, Matchable, None, Option, Some, Status, Success, TagVal, TagValOpen, close, exports, global_scope, is_opened, key, open, original_cache, val;
+      var Failure, Matchable, None, Option, Some, Status, Success, TagVal, TagValOpen, close, exports, global_scope, is_opened, key, match, open, original_cache, val;
       Matchable = (function() {
         function Matchable(tag, val) {
           this.tag = tag;
@@ -234,6 +234,19 @@
       Failure = function(msg) {
         return new Status('Failure', msg);
       };
+      match = function(tagval) {
+        return function(fun_table, fun_default) {
+          var fun;
+          fun = fun_table[tagval.tag];
+          if (fun != null) {
+            return fun.call(tagval, tagval.val);
+          } else if (fun_default != null) {
+            return fun_default.call(tagval);
+          } else {
+            return void 0;
+          }
+        };
+      };
       TagValOpen = {
         Some: Some,
         None: None,
@@ -276,6 +289,7 @@
         Matchable: Matchable,
         Option: Option,
         Status: Status,
+        match: match,
         open: open,
         close: close
       };
