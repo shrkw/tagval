@@ -222,6 +222,16 @@ describe 'TagVal', ->
         expect(x_stat.toOption().equal(x_opt)).toBe true
         expect(y_stat.toOption().equal(y_opt)).toBe true
 
+    describe 'trying', ->
+
+      it "evaluates block f and return Success(f()) or Failure(e) if it catches exception e.", ->
+        succblock = ->
+          1/2
+        failblock = ->
+          throw 'AN ERROR'
+        expect(TagVal.Status.trying(succblock).equal(TagVal.Success(1/2))).toBe true
+        expect(TagVal.Status.trying(failblock).equal(TagVal.Failure('AN ERROR'))).toBe true
+
   describe 'match', ->
 
     it "gets { tag: Tag, val: Value } style object and returns function performs like Matchable#match", ->
@@ -237,6 +247,11 @@ describe 'TagVal', ->
 
     it "is same as Option.fromValue", ->
       expect(TagVal.optionFrom is TagVal.Option.fromValue).toBe true
+
+  describe 'withTry', ->
+
+    it "is same as Status.trying", ->
+      expect(TagVal.withTry is TagVal.Status.trying).toBe true
 
   describe 'open', ->
 

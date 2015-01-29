@@ -235,6 +235,15 @@
         return Status;
 
       })(Matchable);
+      Status.trying = function(f) {
+        var e;
+        try {
+          return Success(f());
+        } catch (_error) {
+          e = _error;
+          return Failure(e);
+        }
+      };
       Success = function(v) {
         return new Status('Success', v);
       };
@@ -298,6 +307,7 @@
         Status: Status,
         match: match,
         optionFrom: Option.fromValue,
+        withTry: Status.trying,
         open: open,
         close: close
       };

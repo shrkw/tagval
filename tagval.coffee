@@ -130,6 +130,13 @@ do =>
         Failure: (msg)-> None()
       , => throw "An invalid tag for Status object was found: '#{@tag}'."
 
+  # try evaluating function with wrapping exception as Failure(e)
+  Status.trying = (f)->
+    try
+      Success(f())
+    catch e
+      Failure(e)
+
   # Simple constructor of Status
   Success = (v)  -> new Status 'Success', v
   Failure = (msg)-> new Status 'Failure', msg
@@ -179,6 +186,7 @@ do =>
     Status: Status
     match: match
     optionFrom: Option.fromValue
+    withTry: Status.trying
     open: open
     close: close
   for key, val of TagValOpen
