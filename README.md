@@ -172,6 +172,12 @@ These methods are inherited from `Matchable` class. See below.
 ### `TagVal.Status`
 Status object is a class that express "success with result"(Success) or "failure with message"(Failure).
 
+#### `TagVal.Status.trying(f)`
+##### alias: `TagVal.withTry`
+
+- evaluates `f()` and returns `Success(f())`
+- if `f()` throws an exception `e`, returns `Failure(e)`
+
 **let `stat` be a `Status` object below:**
 
 #### `stat.getOrThrow()`
