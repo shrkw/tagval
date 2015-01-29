@@ -83,6 +83,11 @@ creates a new `Option` object tagged `None` and retaining nothing.
 
 You can use also `new TagVal.Option(v)`.
 
+#### `TagVal.Option.fromBool(v)`
+
+- If `v` is truthy, it returns `Some(true)`
+- Otherwise, it returns `None()`
+
 **Let `opt` be a `Option` object below:**
 
 #### `opt.map(f)`
@@ -166,6 +171,12 @@ These methods are inherited from `Matchable` class. See below.
 ## Status Class
 ### `TagVal.Status`
 Status object is a class that express "success with result"(Success) or "failure with message"(Failure).
+
+#### `TagVal.Status.trying(f)`
+##### alias: `TagVal.withTry`
+
+- evaluates `f()` and returns `Success(f())`
+- if `f()` throws an exception `e`, returns `Failure(e)`
 
 **let `stat` be a `Status` object below:**
 

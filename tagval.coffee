@@ -107,6 +107,9 @@ do =>
   # Create Option from undefined-able value
   Option.fromValue = (v)-> new Option v
 
+  # Create Option from Boolean value. true to Some(true), false to None.
+  Option.fromBool = (v)-> if v then Some true else None()
+
   ## Status Class
   # Status is a simple type that means "Success or Failure".
   # This is the same as Option except that it is assumed Failure may
@@ -126,6 +129,13 @@ do =>
         Success: (v)  -> Some(v)
         Failure: (msg)-> None()
       , => throw "An invalid tag for Status object was found: '#{@tag}'."
+
+  # try evaluating function with wrapping exception as Failure(e)
+  Status.trying = (f)->
+    try
+      Success(f())
+    catch e
+      Failure(e)
 
   # Simple constructor of Status
   Success = (v)  -> new Status 'Success', v
@@ -176,6 +186,7 @@ do =>
     Status: Status
     match: match
     optionFrom: Option.fromValue
+    withTry: Status.trying
     open: open
     close: close
   for key, val of TagValOpen
