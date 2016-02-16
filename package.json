@@ -20,7 +20,6 @@
   ],
   "main": "tagval.js",
   "scripts": {
-    "prepublish": "gulp prepublish --require coffee-script",
     "build": "gulp build --require coffee-script",
     "test": "gulp test --require coffee-script"
   },
