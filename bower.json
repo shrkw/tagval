@@ -1,7 +1,7 @@
 {
   "name": "tagval",
   "main": "tagval.js",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/mizukami234/tagval",
   "authors": [
     "Shun Mizukami <norainu234@gmail.com>"
