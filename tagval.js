@@ -1,10 +1,10 @@
 (function() {
-  var __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+  var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    hasProp = {}.hasOwnProperty;
 
   (function(_this) {
     return (function() {
-      var Failure, Matchable, None, Option, Some, Status, Success, TagVal, TagValOpen, close, exports, global_scope, is_opened, key, match, open, original_cache, val;
+      var Failure, Matchable, None, Option, Some, Status, Success, TagVal, exports, match;
       Matchable = (function() {
         function Matchable(tag, val) {
           this.tag = tag;
@@ -32,7 +32,7 @@
         };
 
         Matchable.prototype.toString = function() {
-          return "" + this.tag + "(" + this.val + ")";
+          return this.tag + "(" + this.val + ")";
         };
 
         Matchable.prototype.equal = function(a) {
@@ -50,8 +50,8 @@
         return Matchable;
 
       })();
-      Option = (function(_super) {
-        __extends(Option, _super);
+      Option = (function(superClass) {
+        extend(Option, superClass);
 
         function Option(v) {
           if (v != null) {
@@ -195,8 +195,8 @@
           return None();
         }
       };
-      Status = (function(_super) {
-        __extends(Status, _super);
+      Status = (function(superClass) {
+        extend(Status, superClass);
 
         function Status() {
           return Status.__super__.constructor.apply(this, arguments);
@@ -236,11 +236,11 @@
 
       })(Matchable);
       Status.trying = function(f) {
-        var e;
+        var e, error;
         try {
           return Success(f());
-        } catch (_error) {
-          e = _error;
+        } catch (error) {
+          e = error;
           return Failure(e);
         }
       };
@@ -263,58 +263,18 @@
           }
         };
       };
-      TagValOpen = {
-        Some: Some,
-        None: None,
-        Success: Success,
-        Failure: Failure
-      };
-      is_opened = false;
-      original_cache = {};
-      global_scope = _this;
-      open = (function() {
-        var _open;
-        _open = function() {
-          var key, val;
-          if (!is_opened) {
-            for (key in TagValOpen) {
-              val = TagValOpen[key];
-              original_cache[key] = global_scope[key];
-              global_scope[key] = val;
-            }
-            return is_opened = true;
-          }
-        };
-        return _open;
-      })();
-      close = (function() {
-        var _close;
-        _close = function() {
-          var key, val;
-          if (is_opened) {
-            for (key in original_cache) {
-              val = original_cache[key];
-              global_scope[key] = val;
-            }
-            return is_opened = false;
-          }
-        };
-        return _close;
-      })();
       TagVal = {
         Matchable: Matchable,
         Option: Option,
         Status: Status,
+        Some: Some,
+        None: None,
+        Success: Success,
+        Failure: Failure,
         match: match,
         optionFrom: Option.fromValue,
-        withTry: Status.trying,
-        open: open,
-        close: close
+        withTry: Status.trying
       };
-      for (key in TagValOpen) {
-        val = TagValOpen[key];
-        TagVal[key] = val;
-      }
       if (typeof exports !== "undefined" && exports !== null) {
         exports = TagVal;
         return exports.TagVal = TagVal;

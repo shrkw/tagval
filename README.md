@@ -57,7 +57,7 @@ console.log y # 10
 var optionalX = find_num(); // assume it returns `Option`
 var DEFAULT_X = 30;
 
-// Try to set a found number or 30 by default.
+// Try to set the found number or 30 by default.
 var x = optionalX.getOrElse(DEFAULT_X);
 ```
 

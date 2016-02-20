@@ -148,49 +148,18 @@ do =>
       if fun? then fun.call(tagval, tagval.val)
       else if fun_default? then fun_default.call(tagval) else undefined
 
-  # open-able TagVal Module
-  TagValOpen =
-    Some: Some
-    None: None
-    Success: Success
-    Failure: Failure
-
-  ## open/close TagVal Module
-  # For those who want to use TagValOpen's functions (see above) with global,
-  # TagVal.open() and TagVal.close() set/unset them to global object.
-  is_opened = false
-  original_cache = {}
-  global_scope = @
-  open = do =>
-    # main open function
-    _open = ->
-      if not is_opened
-        for key, val of TagValOpen
-          original_cache[key] = global_scope[key]
-          global_scope[key] = val
-        is_opened = true
-    _open
-  close = do =>
-    # main close function
-    _close = ->
-      if is_opened
-        for key, val of original_cache
-          global_scope[key] = val
-        is_opened = false
-    _close
-
   # TagVal main Module
   TagVal =
     Matchable: Matchable
     Option: Option
     Status: Status
+    Some: Some
+    None: None
+    Success: Success
+    Failure: Failure
     match: match
     optionFrom: Option.fromValue
     withTry: Status.trying
-    open: open
-    close: close
-  for key, val of TagValOpen
-    TagVal[key] = val
 
   # Export TagVal for Node.js
   if exports?
