@@ -25,6 +25,7 @@ test_path = "test/*.js"
 gulp.task 'test', ->
   gulp.src test_path
     .pipe plumber(errorHandler: notify.onError '<%= error.message %>')
+    .pipe coffee()
     .pipe mocha()
 
 gulp.task 'prepublish', ['build', 'test']
