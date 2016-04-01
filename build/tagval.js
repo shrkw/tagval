@@ -12,7 +12,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+/**
+ * Class representing tagged value.
+ */
+
 var Matchable = function () {
+  /**
+   * Creates taggad value object.
+   * @param {string} tag - Tag name.
+   * @param {any} val - Contained value.
+   */
+
   function Matchable(tag, val) {
     _classCallCheck(this, Matchable);
 
@@ -20,12 +30,27 @@ var Matchable = function () {
     this.val = val;
   }
 
+  /**
+   * Tag divided pattern matching.
+   * @param {object} fun_table - Map from tag to function.
+   * @param {function} fun_default - Default function used when the tag doesn't exist in keys of `fun_table`.
+   * @return - Result value of matched function, otherwise `undefined`.
+   */
+
+
   _createClass(Matchable, [{
     key: "match",
     value: function match(fun_table, fun_default) {
       var fun = fun_table[this.tag];
       if (fun !== undefined) return fun.call(this, this.val);else if (fun_default !== undefined) return fun_default.call(this, this.val);else return;
     }
+
+    /**
+     * Partial application of tag divided pattern matching.
+     * @param {object} fun_table - Map from tag to function.
+     * @return - Result value of matched function, otherwise **object itself**.
+     */
+
   }, {
     key: "when",
     value: function when(fun_table) {
@@ -35,20 +60,41 @@ var Matchable = function () {
         return _this;
       });
     }
+
+    /**
+     * Stringify function.
+     * @return {string} - Formatted `Tag(value.toString())`,
+     */
+
   }, {
     key: "toString",
     value: function toString() {
       return this.tag + "(" + this.val + ")";
     }
+
+    /**
+     * Equality function.
+     * @param {Matchable} tv - Compared object.
+     * @return {boolean} - `false` unless both tags are the same, and return the result of `valEqual`.
+     */
+
   }, {
     key: "equal",
-    value: function equal(a) {
-      if (this.tag === a.tag) return this.valEqual(a);else return false;
+    value: function equal(tv) {
+      if (this.tag === tv.tag) return this.valEqual(tv);else return false;
     }
+
+    /**
+     * Value equality function.
+     * Subclasses can override this function to implement equality.
+     * @param {Matchable} tv - Compared object.
+     * @return {boolean} - return the equality of both values.
+     */
+
   }, {
     key: "valEqual",
-    value: function valEqual(a) {
-      return this.val === a.val;
+    value: function valEqual(tv) {
+      return this.val === tv.val;
     }
   }]);
 
@@ -59,16 +105,26 @@ function option_unexpected_tag_found(option) {
   throw new Error("TagVal.Option Error: Unexpected tag was found: " + option.tag + ".");
 }
 
+/**
+ * Class representing **something x** or **nothing**.
+ */
+
 var Option = function (_Matchable) {
   _inherits(Option, _Matchable);
 
-  function Option(v) {
+  /**
+   * Creates new Option object.
+   * @param {any} val - (Optional) Value to be contained with tagged `Some`.
+   * @return {Option} - Returns `Some(val)` if `val` is specified, otherwise `None()`.
+   */
+
+  function Option(val) {
     _classCallCheck(this, Option);
 
-    if (v !== undefined) {
+    if (val !== undefined) {
       ;
 
-      var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Option).call(this, 'Some', v));
+      var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Option).call(this, 'Some', val));
     } else {
       ;
 
@@ -76,22 +132,36 @@ var Option = function (_Matchable) {
     }return _possibleConstructorReturn(_this2);
   }
 
+  /**
+   * Apply function to contained value.
+   * @param {function} fn - Function to apply.
+   * @return {Option} - `Some(fn(val))` if `Some(val)`, otherwise `None()`.
+   */
+
+
   _createClass(Option, [{
     key: "map",
-    value: function map(f) {
+    value: function map(fn) {
       var _this3 = this;
 
       return this.match({
         Some: function Some(v) {
-          return new Option(f(v));
+          return _Some(fn(v));
         },
         None: function None() {
-          return new Option();
+          return _None();
         }
       }, function () {
         return option_unexpected_tag_found(_this3);
       });
     }
+
+    /**
+     * Extract some value with default value.
+     * @param {any} x - Default value.
+     * @return - `val` if `Some(val)`, otherwise `x`.
+     */
+
   }, {
     key: "getOrElse",
     value: function getOrElse(x) {
@@ -108,6 +178,13 @@ var Option = function (_Matchable) {
         return option_unexpected_tag_found(_this4);
       });
     }
+
+    /**
+     * Extract some value with default lazy value.
+     * @param {function} f - Lazy function returns default value.
+     * @return - `val` if `Some(val)`, otherwise `f()`.
+     */
+
   }, {
     key: "getOrElseF",
     value: function getOrElseF(f) {
@@ -124,6 +201,12 @@ var Option = function (_Matchable) {
         return option_unexpected_tag_found(_this5);
       });
     }
+
+    /**
+     * Convert to Array.
+     * @return - `[val]` if `Some(val)`, otherwise `[]`.
+     */
+
   }, {
     key: "toArray",
     value: function toArray() {
@@ -140,6 +223,13 @@ var Option = function (_Matchable) {
         return option_unexpected_tag_found(_this6);
       });
     }
+
+    /**
+     * Convert to Status object with failure message.
+     * @param {any} msg - Message passed to failure.
+     * @return {Status} - `Success(val)` if `Some(val)`, otherwise `Failure(msg)`.
+     */
+
   }, {
     key: "toStatus",
     value: function toStatus() {
@@ -158,6 +248,12 @@ var Option = function (_Matchable) {
         return option_unexpected_tag_found(_this7);
       });
     }
+
+    /**
+     * Convert to value.
+     * @return - Value if `Some(val)`, otherwise `undefined`.
+     */
+
   }, {
     key: "toValue",
     value: function toValue() {
@@ -186,6 +282,14 @@ var Option = function (_Matchable) {
         }
       });
     }
+
+    /**
+     * Higher order equality application.
+     * @param {Option} a - Compared object.
+     * @param {function} f - Equality function.
+     * @return - return `f(this.val, a.val)` if both are `Some` and return `true` if both are `None`, otherwise `false`.
+     */
+
   }, {
     key: "mapEqual",
     value: function mapEqual(a, f) {
@@ -203,19 +307,41 @@ var Option = function (_Matchable) {
   return Option;
 }(Matchable);
 
-function Some(v) {
+/**
+ * Creates `Some` tagged Option. Alias of `new Option(val)`.
+ * @param {any} v - Contained value.
+ * @return {Option} - `Some` tagged Option object.
+ */
+
+
+function _Some(v) {
   return new Option(v);
 }
-function None() {
+
+/**
+ * Creates `None` tagged Option. Alias of `new Option()`.
+ * @return {Option} - `None` tagged Option object.
+ */
+function _None() {
   return new Option();
 }
 
+/**
+ * Creates Option object from value.
+ * @param {any} v - Value passed to Option.
+ * @return {Option} - `Some(val)` if `v` is exist, otherwise `None()`.
+ */
 Option.fromValue = function (v) {
   return new Option(v);
 };
 
+/**
+ * Creates Option object from boolean.
+ * @param {boolean} v - Value passed to Option.
+ * @return {Option} - `Some(true)` if `v` is truthy, otherwise `None()`.
+ */
 Option.fromBool = function (v) {
-  if (v) return Some(true);else return None();
+  if (v) return _Some(true);else return _None();
 };
 
 function status_unexpected_tag_found(status) {
@@ -254,10 +380,10 @@ var Status = function (_Matchable2) {
 
       return this.match({
         Success: function Success(v) {
-          return Some(v);
+          return _Some(v);
         },
         Failure: function Failure(msg) {
-          return None();
+          return _None();
         }
       }, function () {
         return status_unexpected_tag_found(_this11);
@@ -297,8 +423,8 @@ var TagVal = {
   Matchable: Matchable,
   Option: Option,
   Status: Status,
-  Some: Some,
-  None: None,
+  Some: _Some,
+  None: _None,
   Success: Success,
   Failure: Failure,
   match: match,
@@ -309,8 +435,8 @@ var TagVal = {
 exports.Matchable = Matchable;
 exports.Option = Option;
 exports.Status = Status;
-exports.Some = Some;
-exports.None = None;
+exports.Some = _Some;
+exports.None = _None;
 exports.Success = Success;
 exports.Failure = Failure;
 exports.match = match;

@@ -3,6 +3,7 @@ import rename  from 'gulp-rename';
 import uglify  from 'gulp-uglify';
 import mocha   from 'gulp-mocha';
 import babel   from 'gulp-babel';
+import jsdoc   from 'gulp-jsdoc3';
 
 var source_path = "./src/tagval.js";
 var test_path = "test/*.js";
@@ -19,8 +20,13 @@ gulp.task('build', ()=> {
     .pipe(gulp.dest(js_dest));
 });
 
+gulp.task('doc', ()=> {
+  gulp.src(source_path)
+    .pipe(jsdoc())
+})
+
 gulp.task('watch', ()=> {
-  gulp.watch(source_path, ['build']);
+  gulp.watch(source_path, ['build', 'doc']);
 });
 
 gulp.task('test', ()=> {
