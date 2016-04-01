@@ -1,22 +1,18 @@
 import gulp    from 'gulp';
 import rename  from 'gulp-rename';
-import plumber from 'gulp-plumber';
-import coffee  from 'gulp-coffee';
 import uglify  from 'gulp-uglify';
-import notify  from 'gulp-notify';
 import mocha   from 'gulp-mocha';
+import babel   from 'gulp-babel';
 
-var source_path = "tagval.coffee";
+var source_path = "./src/tagval.js";
 var test_path = "test/*.js";
-var js_dest = "./";
-var js_min_filename = "./tagval-min.js";
+var js_dest = "./build";
+var js_min_filename = "tagval-min.js";
+var test_path = "test/*.js";
 
 gulp.task('build', ()=> {
   gulp.src(source_path)
-    .pipe(plumber({
-      errorHandler: notify.onError('<%= error.message %>')
-    }))
-    .pipe(coffee())
+    .pipe(babel())
     .pipe(gulp.dest(js_dest))
     .pipe(uglify())
     .pipe(rename(js_min_filename))
@@ -29,11 +25,7 @@ gulp.task('watch', ()=> {
 
 gulp.task('test', ()=> {
   gulp.src(test_path)
-    .pipe(plumber({
-      errorHandler: notify.onError('<%= error.message %>')
-    }))
-    .pipe(coffee())
     .pipe(mocha());
 });
 
-gulp.task('prepublish', ['build', 'test']);
+gulp.task('prepublish', ['test']);

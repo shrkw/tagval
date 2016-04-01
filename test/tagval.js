@@ -1,5 +1,5 @@
 var assert = require('assert');
-var TagVal = require('../tagval').TagVal;
+var TagVal = require('../build/tagval').TagVal;
 
 describe('TagVal', function() {
 
