@@ -113,7 +113,7 @@ var Option = function (_Matchable) {
   _inherits(Option, _Matchable);
 
   /**
-   * Creates new Option object.
+   * Creates new Option object. **You don't need to use this.** Use [Some]{@link Some} and [None]{@link None} instead.
    * @param {any} val - (Optional) Value to be contained with tagged `Some`.
    * @return {Option} - Returns `Some(val)` if `val` is specified, otherwise `None()`.
    */
@@ -121,7 +121,7 @@ var Option = function (_Matchable) {
   function Option(val) {
     _classCallCheck(this, Option);
 
-    if (val !== undefined) {
+    if (val !== undefined && val !== null) {
       ;
 
       var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Option).call(this, 'Some', val));
@@ -308,7 +308,7 @@ var Option = function (_Matchable) {
 }(Matchable);
 
 /**
- * Creates `Some` tagged Option. Alias of `new Option(val)`.
+ * Creates `Some` tagged Option.
  * @param {any} v - Contained value.
  * @return {Option} - `Some` tagged Option object.
  */
@@ -319,7 +319,7 @@ function _Some(v) {
 }
 
 /**
- * Creates `None` tagged Option. Alias of `new Option()`.
+ * Creates `None` tagged Option.
  * @return {Option} - `None` tagged Option object.
  */
 function _None() {
@@ -348,6 +348,10 @@ function status_unexpected_tag_found(status) {
   throw new Error("TagVal.Status Error: Unexpected tag was found: " + status.tag + ".");
 }
 
+/**
+ * Class representing "Success with something" or "Failure with message".
+ */
+
 var Status = function (_Matchable2) {
   _inherits(Status, _Matchable2);
 
@@ -359,6 +363,11 @@ var Status = function (_Matchable2) {
 
   _createClass(Status, [{
     key: "getOrThrow",
+
+    /**
+     * Get the value if Success, otherwise throw Failure message.
+     * @return - `val` if `Success(val)`.
+     */
     value: function getOrThrow() {
       var _this10 = this;
 
@@ -373,6 +382,12 @@ var Status = function (_Matchable2) {
         return status_unexpected_tag_found(_this10);
       });
     }
+
+    /**
+     * Convert to Option Class.
+     * @return {Option} - `Some(v)` if `Success(v)`, otherwise `None()`
+     */
+
   }, {
     key: "toOption",
     value: function toOption() {
@@ -394,6 +409,13 @@ var Status = function (_Matchable2) {
   return Status;
 }(Matchable);
 
+/**
+ * Utility procedure wrapper function that always returns a Status class object.
+ * @param {function} f - Function to be tried.
+ * @return {Status} - `Success(f())` if `f()` doesn't throw any error `e`, otherwise returns `Failure(e)`.
+ */
+
+
 Status.trying = function (f) {
   try {
     return Success(f());
@@ -402,13 +424,29 @@ Status.trying = function (f) {
   }
 };
 
+/**
+ * Creates `Success` tagged Status.
+ * @param {any} v - Contained value.
+ * @return {Status} - `Success` tagged Status object.
+ */
 function Success(v) {
   return new Status('Success', v);
 }
+
+/**
+ * Creates `Failure` tagged Status.
+ * @param {any} msg - Contained value.
+ * @return {Status} - `Failure` tagged Status object.
+ */
 function Failure(msg) {
   return new Status('Failure', msg);
 }
 
+/**
+ * Generates pattern matcher function used in [Matchable#match]{@link Matchable#match}.
+ * @param {Object} tagval - Object formatted as `{ tag: String, val: Any }`.
+ * @return {function} - Pattern match function which accepts table of functions like.
+ */
 function match(tagval) {
   return function (fun_table, fun_default) {
     var fun = fun_table[tagval.tag];
@@ -416,7 +454,14 @@ function match(tagval) {
   };
 }
 
+/**
+ * Alias of [Option.fromValue]{@link Option.fromValue}.
+ */
 var optionFrom = Option.fromValue;
+
+/**
+ * Alias of [Status.trying]{@link Status.withTry}.
+ */
 var withTry = Status.trying;
 
 var TagVal = {
@@ -431,6 +476,11 @@ var TagVal = {
   optionFrom: Option.fromValue,
   withTry: Status.trying
 };
+
+// browser support
+if (window !== undefined) {
+  window.TagVal = TagVal;
+}
 
 exports.Matchable = Matchable;
 exports.Option = Option;

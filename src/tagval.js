@@ -74,12 +74,12 @@ function option_unexpected_tag_found(option){
  */
 class Option extends Matchable {
   /**
-   * Creates new Option object.
+   * Creates new Option object. **You don't need to use this.** Use [Some]{@link Some} and [None]{@link None} instead.
    * @param {any} val - (Optional) Value to be contained with tagged `Some`.
    * @return {Option} - Returns `Some(val)` if `val` is specified, otherwise `None()`.
    */
   constructor(val){
-    if (val !== undefined) super('Some', val);
+    if (val !== undefined && val !== null) super('Some', val);
     else super('None');
   }
 
@@ -176,14 +176,14 @@ class Option extends Matchable {
 }
 
 /**
- * Creates `Some` tagged Option. Alias of `new Option(val)`.
+ * Creates `Some` tagged Option.
  * @param {any} v - Contained value.
  * @return {Option} - `Some` tagged Option object.
  */
 function Some(v){ return new Option(v); }
 
 /**
- * Creates `None` tagged Option. Alias of `new Option()`.
+ * Creates `None` tagged Option.
  * @return {Option} - `None` tagged Option object.
  */
 function None(){ return new Option(); }
@@ -211,7 +211,14 @@ function status_unexpected_tag_found(status){
   throw new Error("TagVal.Status Error: Unexpected tag was found: "+status.tag+".");
 }
 
+/**
+ * Class representing "Success with something" or "Failure with message".
+ */
 class Status extends Matchable {
+  /**
+   * Get the value if Success, otherwise throw Failure message.
+   * @return - `val` if `Success(val)`.
+   */
   getOrThrow(){
     return this.match({
       Success(v){ return v; },
@@ -219,6 +226,10 @@ class Status extends Matchable {
     }, ()=> status_unexpected_tag_found(this));
   }
 
+  /**
+   * Convert to Option Class.
+   * @return {Option} - `Some(v)` if `Success(v)`, otherwise `None()`
+   */
   toOption(){
     return this.match({
       Success(v){ return Some(v); },
@@ -227,6 +238,11 @@ class Status extends Matchable {
   }
 }
 
+/**
+ * Utility procedure wrapper function that always returns a Status class object.
+ * @param {function} f - Function to be tried.
+ * @return {Status} - `Success(f())` if `f()` doesn't throw any error `e`, otherwise returns `Failure(e)`.
+ */
 Status.trying = function(f){
   try {
     return Success(f());
@@ -235,9 +251,26 @@ Status.trying = function(f){
   }
 }
 
+
+/**
+ * Creates `Success` tagged Status.
+ * @param {any} v - Contained value.
+ * @return {Status} - `Success` tagged Status object.
+ */
 function Success(v){ return new Status('Success', v); }
+
+/**
+ * Creates `Failure` tagged Status.
+ * @param {any} msg - Contained value.
+ * @return {Status} - `Failure` tagged Status object.
+ */
 function Failure(msg){ return new Status('Failure', msg); }
 
+/**
+ * Generates pattern matcher function used in [Matchable#match]{@link Matchable#match}.
+ * @param {Object} tagval - Object formatted as `{ tag: String, val: Any }`.
+ * @return {function} - Pattern match function which accepts table of functions like.
+ */
 function match(tagval){
   return function(fun_table, fun_default){
     const fun = fun_table[tagval.tag];
@@ -247,7 +280,14 @@ function match(tagval){
   };
 }
 
+/**
+ * Alias of [Option.fromValue]{@link Option.fromValue}.
+ */
 const optionFrom = Option.fromValue;
+
+/**
+ * Alias of [Status.trying]{@link Status.withTry}.
+ */
 const withTry = Status.trying;
 
 const TagVal = {
@@ -262,6 +302,11 @@ const TagVal = {
   optionFrom: Option.fromValue,
   withTry: Status.trying,
 };
+
+// browser support
+if (window !== undefined) {
+  window.TagVal = TagVal;
+}
 
 export {
   Matchable,

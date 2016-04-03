@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Global</title>
+	<title>Documentation Class: Status</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -70,14 +70,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Global</h1>
+	<h1 class="page-title">Class: Status</h1>
 <section>
 
 <header>
     
         <h2>
-        
+        Status
         </h2>
+        
+            <div class="class-description"><p>Class representing &quot;Success with something&quot; or &quot;Failure with message&quot;.</p></div>
         
     
 </header>
@@ -87,79 +89,21 @@
     <div class="container-overview">
     
         
-
-        
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        <dl>
-            
 <hr>
-<dt class="name" id="optionFrom">
-    <h4><span class="type-signature">&lt;constant> </span>optionFrom<span class="type-signature"></span></h4>
-
+<dt>
+    <h4 class="name" id="Status"><span class="type-signature"></span>new Status()</h4>
+    
     
 </dt>
 <dd>
-    
-    <div class="description">
-        <p>Alias of <a href="Option.html#.fromValue">Option.fromValue</a>.</p>
-    </div>
+
     
 
+    
+
+    
+
+    
     
 
     
@@ -201,36 +145,24 @@
 	
 </dl>
 
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
 
     
 </dd>
 
-        
-            
-<hr>
-<dt class="name" id="withTry">
-    <h4><span class="type-signature">&lt;constant> </span>withTry<span class="type-signature"></span></h4>
-
     
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Alias of Status.trying.</p>
     </div>
-    
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
 
     
 
@@ -240,32 +172,8 @@
 
     
 
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
     
-</dd>
 
-        </dl>
     
 
     
@@ -275,7 +183,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="Failure"><span class="type-signature"></span>Failure(msg)</h4>
+    <h4 class="name" id=".trying"><span class="type-signature">&lt;static> </span>trying(f)</h4>
     
     
 </dt>
@@ -283,7 +191,7 @@
 
     
     <div class="description">
-        <p>Creates <code>Failure</code> tagged Status.</p>
+        <p>Utility procedure wrapper function that always returns a Status class object.</p>
     </div>
     
 
@@ -318,428 +226,16 @@
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>f</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">any</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Contained value.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li><code>Failure</code> tagged Status object.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Status.html">Status</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="match"><span class="type-signature"></span>match(tagval)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Generates pattern matcher function used in <a href="Matchable.html#match">Matchable#match</a>.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>tagval</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Object formatted as <code>{ tag: String, val: Any }</code>.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li>Pattern match function which accepts table of functions like.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
 <span class="param-type">function</span>
 
 
 
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="None"><span class="type-signature"></span>None()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Creates <code>None</code> tagged Option.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li><code>None</code> tagged Option object.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Option.html">Option</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="Some"><span class="type-signature"></span>Some(v)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Creates <code>Some</code> tagged Option.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>v</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">any</span>
-
-
-
             
             </td>
 
@@ -747,7 +243,7 @@
 
             
 
-            <td class="description last"><p>Contained value.</p></td>
+            <td class="description last"><p>Function to be tried.</p></td>
         </tr>
 
     
@@ -812,161 +308,7 @@
             
 <div class="param-desc">
     <ul>
-<li><code>Some</code> tagged Option object.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Option.html">Option</a></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="Success"><span class="type-signature"></span>Success(v)</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        <p>Creates <code>Success</code> tagged Status.</p>
-    </div>
-    
-
-    
-
-    
-
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params table table-striped">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>v</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">any</span>
-
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Contained value.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    <ul>
-<li><code>Success</code> tagged Status object.</li>
+<li><code>Success(f())</code> if <code>f()</code> doesn't throw any error <code>e</code>, otherwise returns <code>Failure(e)</code>.</li>
 </ul>
 </div>
 
@@ -979,6 +321,201 @@
     <dd>
         
 <span class="param-type"><a href="Status.html">Status</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getOrThrow"><span class="type-signature"></span>getOrThrow()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get the value if Success, otherwise throw Failure message.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li><code>val</code> if <code>Success(val)</code>.</li>
+</ul>
+</div>
+
+
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="toOption"><span class="type-signature"></span>toOption()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Convert to Option Class.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <ul>
+<li><code>Some(v)</code> if <code>Success(v)</code>, otherwise <code>None()</code></li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Option.html">Option</a></span>
 
 
 
