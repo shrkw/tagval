@@ -135,7 +135,7 @@ describe('TagVal', function() {
         assert.deepEqual(y_opt.toArray(), []);
       });
     });
-      
+
     describe('toStatus', function() {
 
       it("converts Some(x) to Success(x) and None() to Failure(msg) with message msg.", function() {
@@ -204,10 +204,15 @@ describe('TagVal', function() {
       it("converts undefined to None(), non-undefined value to Some(value)", function() {
         var x = 100;
         var y = undefined;
-        var x_opt = TagVal.Some(100);
-        var y_opt = TagVal.None();
-        assert.equal(TagVal.Option.fromValue(x).equal(x_opt), true);
-        assert.equal(TagVal.Option.fromValue(y).equal(y_opt), true);
+        var z = { tag: 'None' };
+        var o = { tag: 'Some', val:100 };
+
+        var some_opt = TagVal.Some(100);
+        var none_opt = TagVal.None();
+        assert.equal(TagVal.Option.fromValue(x).equal(some_opt), true);
+        assert.equal(TagVal.Option.fromValue(y).equal(none_opt), true);
+        assert.equal(TagVal.Option.fromValue(z).equal(none_opt), true);
+        assert.equal(TagVal.Option.fromValue(o).equal(sone_opt), true);
       });
     });
 
@@ -272,7 +277,7 @@ describe('TagVal', function() {
       assert.equal(col(tv5), 16);
     });
   });
-      
+
   describe('optionFrom', function() {
 
     it("is same as Option.fromValue", function() {

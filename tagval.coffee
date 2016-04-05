@@ -2,7 +2,7 @@ do =>
 
   # Base class of tagged value
   class Matchable
-    
+
     # Constructor
     # Matchable class doesn't know that what tags are valid. So, we
     # recommend to use Maker to create instance generator of Matchable class
@@ -42,7 +42,16 @@ do =>
 
     # Constructor
     constructor: (v)->
-      if v? then super('Some', v) else super('None')
+      if v?
+        if v.tag
+          if v.tag.toLowerCase() == 'some' && v.val
+            super('Some', v.val)
+          else
+            super('None')
+        else
+          super('Some', v)
+      else
+        super('None')
 
     # Apply function to value of Some
     # < Some(v) | None > -> < Some(f(v)) | None >
@@ -143,7 +152,7 @@ do =>
 
   # Functional Utilities
   match = (tagval)->
-    (fun_table, fun_default)-> 
+    (fun_table, fun_default)->
       fun = fun_table[tagval.tag]
       if fun? then fun.call(tagval, tagval.val)
       else if fun_default? then fun_default.call(tagval) else undefined
